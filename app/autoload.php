@@ -8,10 +8,10 @@
         '../app/forms/',
         '../app/library/',
     ));
-
+    
     $loader->registerNamespaces(array(
-        'SayVot\\Misc' => '../app/misc/',
-        'SayVot\\Logic' => '../app/logic/'
+        'Sayvot\\Misc' => '../app/misc/',
+        'Sayvot\\Logic' => '../app/logic/'
     ), true);
 
     // register autoloader

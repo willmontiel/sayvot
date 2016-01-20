@@ -3,7 +3,7 @@
 require_once '../app/autoload.php';
 
 try {
-    $app = new \Sayvot\Logic\AppObjects();
+    $app = new \Sayvot\Logic\AppConfig();
     $app->setConfigPath("../app/config/configuration.ini");
 	
     $app->configure();

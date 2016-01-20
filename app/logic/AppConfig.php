@@ -50,8 +50,8 @@ class AppConfig {
         $this->setLogger();
 
         $this->setSmartMenu();
-        $this->setView();
         $this->setVoltCompiler();
+        $this->setView();
     }
 
     /**
@@ -368,8 +368,7 @@ class AppConfig {
         $di = $this->di;
         $di->setShared('volt', function($view, $di) {
             $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
-            $compiler = $volt->getCompiler();
-
+                        
             $volt->setOptions(array(
                 "compileAlways" => true,
                 "compiledPath" => "../app/compiled-volt-files/",
@@ -397,7 +396,7 @@ class AppConfig {
 	
     private function setFullPath() {
         $path = new \stdClass();
-        $path->path = $this->config->general->path;
+        $path->path = $this->config->uri->path;
         $this->di->set('path', $path);
     }
 
