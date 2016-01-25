@@ -1,10 +1,9 @@
 {% extends "templates/default.volt" %}
 {% block css %}{% endblock%}
 {% block javascript %}{% endblock%}
-{% block title %}Dashboard{% endblock%}
-{% block subtitle %}Lorem ipsum dolor sit amet, consectetur adipiscing elit.{% endblock%}
+{% block title %}<i class="fa fa-instagram"></i> Dashboard{% endblock%}
 {% block content %}
-    <h1 class="page-header">Dashboard</h1>
+    <h1 class="page-header">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
 
     <div class="row placeholders">
         <div class="col-xs-6 col-sm-3 placeholder">

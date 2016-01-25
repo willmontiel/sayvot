@@ -39,20 +39,16 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-2 col-md-2 col-lg-1 sidebar">
+                <div class="col-sm-2 col-md-1 col-lg-1 sidebar">
                     <div class="title-container" style="position: relative;">
                         <div class="vertical-text">
                             <div class="title">
                                 {% block title %} {% endblock %}
                             </div>
-                            <hr>
-                            <div class="subtitle">
-                                {% block subtitle %} {% endblock %}
-                            </div>
                         </div>   
                     </div>   
                 </div>
-                <div class="col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 col-lg-11 col-lg-offset-1 main">
+                <div class="col-sm-10 col-sm-offset-2 col-md-11 col-md-offset-1 col-lg-11 col-lg-offset-1 main">
                     {% block content %} {% endblock %}
                     
                     <div class="style-footer">
