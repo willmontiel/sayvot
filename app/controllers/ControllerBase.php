@@ -6,6 +6,9 @@
  */
 class ControllerBase extends \Phalcon\Mvc\Controller {
     protected $_isJsonResponse = false;
+    
+    const START_PAGE = 1;
+    const DEFAULT_LIMIT = 15;
 
     public function initialize() {
     //	if (isset($this->userObject)) {

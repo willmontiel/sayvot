@@ -226,23 +226,9 @@ class AppConfig {
     private function setDb() {
         $config = $this->config;
         $di = $this->di;
-        $di->setShared('db', function() use ($di, $config) {
+        $di->setShared('db', function() use ($config) {
             // Events Manager para la base de datos
             $eventsManager = new \Phalcon\Events\Manager();
-
-            if ($config->general->profiledb) {
-                // Profiler
-                $profiler = $di->get('profiler');
-
-                $eventsManager->attach('db', function ($event, $connection) use ($profiler) {
-                    if ($event->getType() == 'beforeQuery') {
-                        $profiler->startProfile($connection->getSQLStatement());
-                    }
-                    else if ($event->getType() == 'afterQuery') {
-                        $profiler->stopProfile();
-                    }
-                });
-            }
 
             $connection = new \Phalcon\Db\Adapter\Pdo\Mysql($config->database->toArray());
 
@@ -304,10 +290,10 @@ class AppConfig {
     private function setFlashSessionMessages() {
         $this->di->set('flashSession', function(){
             $flash = new \Phalcon\Flash\Session(array(
-                'error' => '',
-                'success' => '',
-                'notice' => '',
-                'warning' => ''
+                'error' => 'alert alert-danger',
+                'success' => 'alert alert-success',
+                'notice' => 'alert alert-info',
+                'warning' => 'alert alert-warning'
             ));
             return $flash;
         });
