@@ -39,6 +39,8 @@
 
         <div class="container-fluid">
             <div class="row">
+                
+                {#
                 <div class="col-sm-2 col-md-1 col-lg-1 sidebar">
                     <div class="title-container" style="position: relative;">
                         <div class="vertical-text">
@@ -48,7 +50,10 @@
                         </div>   
                     </div>   
                 </div>
+                
                 <div class="col-sm-10 col-sm-offset-2 col-md-11 col-md-offset-1 col-lg-11 col-lg-offset-1 main">
+                #}
+                <div class="col-sm-12 col-md-12 col-lg-12 main">
                     {% block content %} {% endblock %}
                     
                     <div class="style-footer">
@@ -72,24 +77,28 @@
                             <ul>
                                 <li>
                                     <a href="#">
-                                        Cuentas
+                                        Herramientas
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        Usuarios
-                                    </a>    
-                                </li>
+                                
                                 <li>
                                     <a href="#">
                                         Encuestas
                                     </a>    
                                 </li>
+                                
                                 <li>
                                     <a href="#">
-                                        Herramientas
+                                        Usuarios
+                                    </a>    
+                                </li>
+                                
+                                <li>
+                                    <a href="#">
+                                        Cuentas
                                     </a>
                                 </li>
+                                
                             </ul>    
                         </div>  
                         
