@@ -3,3 +3,4 @@
 /app/logs/
 /app/compiled-volt-files/
 app/logs/
+/app/cache/metadata/

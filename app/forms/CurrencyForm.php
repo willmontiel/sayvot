@@ -1,9 +1,7 @@
 <?php
 use Phalcon\Forms\Form,
     Phalcon\Forms\Element\Text,
-    Phalcon\Forms\Element\Select,
-    Phalcon\Forms\Element,
-    Phalcon\Forms\Element\TextArea,
+    Phalcon\Forms\Element\Numeric,
     Phalcon\Forms\Element\Check;
 
 class CurrencyForm extends Form {
@@ -36,6 +34,18 @@ class CurrencyForm extends Form {
             'autofocus' => "autofocus",
             'class' => 'form-control',
             'id' => 'simbol'
+        )));
+        
+        $this->add(new Numeric('value', array(
+            'maxlength' => 100,
+            'type' => 'number',
+            'min' => 0,
+            'step' => 'any',
+            'placeholder' => 'Valor en Colombia',
+            'required' => 'required',
+            'autofocus' => "autofocus",
+            'class' => 'form-control',
+            'id' => 'value'
         )));
 		
         $this->add(new Check('status', array(

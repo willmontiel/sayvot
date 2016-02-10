@@ -5,7 +5,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
-            <h1 class="page-header">Conoce cuales monedas han sido registradas en el sistema.</h1>
+            <h1 class="page-header">Conoce cuales tipos de monedas han sido registradas en el sistema.</h1>
         </div>    
     </div>   
     
@@ -19,43 +19,52 @@
         </div>    
     </div>   
     
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <div class="row">
-                {{ partial('partials/pagination', ['pagination_url': 'currency/index']) }}
-            </div>
-            
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Símbolo</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in page.items %}
-                            <tr {% if item.status == 0 %}class="danger"{% endif %}>
-                                <td>{{item.idcurrency}}</td>
-                                <td>{{item.code}}</td>
-                                <td>{{item.name}}</td>
-                                <td>{{item.simbol}}</td>
-                                <td class="text-right">
-                                    <a href="{{url('currency/update')}}/{{item.idcurrency}}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></i></a>
-                                    <a href="{{url('currency/remove')}}/{{item.idcurrency}}" class="btn btn-xs btn-danger"><i class="fa fa-minus"></i></a>
-                                </td>
-                            </tr>   
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-                    
-            <div class="row">
-                {{ partial('partials/pagination', ['pagination_url': 'currency/index']) }}
+    {% if page.items|length > 0%}
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="row">
+                    {{ partial('partials/pagination', ['pagination_url': 'currency/index']) }}
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Valor CO</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in page.items %}
+                                <tr {% if item.status == 0 %}class="danger"{% endif %}>
+                                    <td>{{item.idcurrency}}</td>
+                                    <td>{{item.code}}</td>
+                                    <td>{{item.simbol}} {{item.name}}</td>
+                                    <td><strong>{{item.value + 0}}</strong></td>
+                                    <td>Creado {{date('d/M/Y', item.createdon)}} <br> Actualizado {{date('d/M/Y', item.updatedon)}}</td>
+                                    <td class="text-right">
+                                        <a href="{{url('currency/update')}}/{{item.idcurrency}}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></i></a>
+                                        <a id="show-delete-modal" data-toggle="modal" href="#delete-modal" data-id="{{url('currency/remove')}}/{{item.idcurrency}}" class="btn btn-xs btn-danger"><i class="fa fa-minus"></i></a>
+                                    </td>
+                                </tr>   
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row">
+                    {{ partial('partials/pagination', ['pagination_url': 'currency/index']) }}
+                </div>
+
+
+                {{ partial('partials/delete-modal', ['resource_name': 'Tipo de moneda']) }}
             </div>
         </div>
-    </div>
+    {% else %}        
+        {{ partial('partials/empty-rows', ['resource_name': 'Tipo de moneda', 'resource_url': 'currency/add']) }}
+    {% endif %} 
 {% endblock %} 

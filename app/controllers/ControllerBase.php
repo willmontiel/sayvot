@@ -118,5 +118,40 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
 
         return $obj;
     }
+    
+    protected function saveModel($model, $successMsg) {
+        if ($model->save()) {
+            $this->flashSession->success($successMsg);
+            return true;
+        }
+
+        $m = "";
+        foreach ($model->getMessages() as $msg) {
+            $m .= $msg . "<br>";
+        }
+
+        throw new InvalidArgumentException($m);
+    }
+    
+    protected function validateModel($model, $msg, $redirect) {
+        if (!$model) {
+            $this->flashSession->warning($msg);
+            return $this->response->redirect($redirect);
+        }
+    }
+    
+    protected function deleteModel($model, $successMsg) {
+        if ($model->delete()) {
+            $this->flashSession->warning($successMsg);
+            return true;
+        }
+
+        $m = "";
+        foreach ($model->getMessages() as $msg) {
+            $m .= $msg . "<br>";
+        }
+
+        throw new InvalidArgumentException($m);
+    }
 }
 

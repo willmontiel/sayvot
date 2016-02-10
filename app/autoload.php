@@ -7,6 +7,7 @@
         '../app/models/',
         '../app/forms/',
         '../app/library/',
+        '../app/validators/',
     ));
     
     $loader->registerNamespaces(array(

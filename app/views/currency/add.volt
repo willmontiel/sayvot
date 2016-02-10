@@ -33,11 +33,18 @@
                     {{ currencyForm.render('simbol')}}
                 </div>
                 
-                <div class="checkbox">
-                    <label>
-                        {{ currencyForm.render('status')}} Estado
-                    </label>
+                <div class="form-group">
+                    <label for="simbol">Valor en Colombia</label>
+                    {{ currencyForm.render('value')}}
                 </div>
+                
+                <div class="onoffswitch">
+                    {{ currencyForm.render('status', {'class' : 'onoffswitch-checkbox', 'id' : 'status'})}}
+                    <label class="onoffswitch-label" for="status">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div> 
                 <a href="{{url('currency')}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                 <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
             </form>
