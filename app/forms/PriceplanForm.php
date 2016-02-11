@@ -25,7 +25,7 @@ class PriceplanForm extends Form {
         
         $this->add(new Select('idcurrency', Currency::find(), array(
              'using' => array('idcurrency', 'name'),
-             'class' => 'select2',
+             'class' => 'form-control select2',
              'required' => 'required'
          )));
     }

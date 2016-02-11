@@ -7,6 +7,11 @@ and open the template in the editor.
     Created on : 20/01/2016, 10:15:25 AM
     Author     : william.montiel
 */
+@font-face {
+  font-family: 'Coolvetica';
+  src: url(fonts/coolvetica/coolvetica.ttf);
+}
+
 html, body{
     height: 100%;
 }
@@ -21,6 +26,11 @@ html, body{
  */
 .navbar-fixed-top {
     border-bottom: 1px solid white;
+}
+
+.principal-logo {
+    width: 140px;
+    height: 61px;
 }
 
 .navbar-inverse {

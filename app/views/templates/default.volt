@@ -7,32 +7,40 @@
         <link rel="shortcut icon" type="image/x-icon" href="{{url('')}}images/favicon48x48.ico">
         -->
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        {#
         <link href='https://fonts.googleapis.com/css?family=Exo:400,300,500,600,700,800' rel='stylesheet' type='text/css'>
+        #}
         
         {{ stylesheet_link('vendors/font-awesome-4.5.0/css/font-awesome.min.css') }}
         {{ javascript_include('vendors/jquery/jquery-1.12.0.min.js') }}
-        {{ stylesheet_link('vendors/bootstrap/css/bootstrap.min.css') }}
         {{ stylesheet_link('css/base.css') }}
+        {{ stylesheet_link('vendors/bootstrap/css/bootstrap.min.css') }}
         {% block css %}{% endblock %}
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">SayVot</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Cambiar Contraseña</a></li>
-                        <li><a href="#">Salir</a></li>
-                        <li><a href="#">Will Montiel</a></li>
-                    </ul>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a href="{{url('')}}">
+                                <img class="principal-logo" src="{{url('')}}images/sayvot-logo-horizontal.png" >
+                            </a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Cambiar Contraseña</a></li>
+                                <li><a href="#">Salir</a></li>
+                                <li><a href="#">Will Montiel</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -6,17 +6,17 @@
     "@gray": "lighten(@gray-base, 33.5%)",
     "@gray-light": "lighten(@gray-base, 46.7%)",
     "@gray-lighter": "lighten(@gray-base, 93.5%)",
-    "@brand-primary": "darken(#50697F, 6.5%)",
-    "@brand-success": "#667F66",
-    "@brand-info": "#5B777F",
-    "@brand-warning": "#7F6C50",
-    "@brand-danger": "#CC4E4A",
-    "@body-bg": "#000",
+    "@brand-primary": "darken(#2d55cc, 6.5%)",
+    "@brand-success": "#8cc63f",
+    "@brand-info": "#6b90ff",
+    "@brand-warning": "#fff251",
+    "@brand-danger": "#b24a30",
+    "@body-bg": "#fff",
     "@text-color": "@gray-dark",
     "@link-color": "@brand-primary",
     "@link-hover-color": "darken(@link-color, 15%)",
     "@link-hover-decoration": "underline",
-    "@font-family-sans-serif": "'Exo', Arial, sans-serif",
+    "@font-family-sans-serif": "\"Coolvetica\", Helvetica, Arial, sans-serif",
     "@font-family-serif": "Georgia, \"Times New Roman\", Times, serif",
     "@font-family-monospace": "Menlo, Monaco, Consolas, \"Courier New\", monospace",
     "@font-family-base": "@font-family-sans-serif",
@@ -431,5 +431,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=2a4251471e8783828d05"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=11500a6dbe2f0a1fbf04"
 }
