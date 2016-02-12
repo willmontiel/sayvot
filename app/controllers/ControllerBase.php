@@ -81,44 +81,13 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         }
     }
 	
-    public function getMessageResponse($status)  {
-        $obj = new stdClass();
-
-        switch ($status) {
-            case 200:
-                $obj->type = "success";
-                $obj->msg = "Solicitud resuelta exitosamente";
-                $obj->status = "200";
-                break;
-
-            case 500:
-                $obj->type = "error";
-                $obj->msg = "Ha ocurrido un error mientras se resolvía la solicitud, contacte al administrador";
-                $obj->status = "500";
-                break;
-
-            case 400:
-                $obj->type = "error";
-                $obj->msg = "Solicitud incorrecta";
-                $obj->status = "400";
-                break;
-
-            case 404:
-                $obj->type = "error";
-                $obj->msg = "Recurso no encontrado";
-                $obj->status = "404";
-                break;
-
-            default:
-                $obj->type = "success";
-                $obj->msg = "error";
-                $obj->status = 500;
-                break;
-        }
-
-        return $obj;
-    }
-    
+    /**
+     * Guarda el modelo que le es pasado por párametro, y un mensaje en caso de exito en el flashSession, genera una Excepción en caso de error 
+     * @param \Phalcon\Mvc\Model $model
+     * @param String $successMsg
+     * @return boolean
+     * @throws InvalidArgumentException
+     */
     protected function saveModel($model, $successMsg) {
         if ($model->save()) {
             $this->flashSession->success($successMsg);
@@ -133,6 +102,14 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         throw new InvalidArgumentException($m);
     }
     
+    /**
+     * Valida si un modelo existe, en caso de que no carga el mensaje pasado por parametro en flashSession y redirige a la acción o controlador que ha sido
+     * pasado como párametro
+     * @param \Phalcon\Mvc\Model $model
+     * @param String $msg
+     * @param String $redirect
+     * @return type
+     */
     protected function validateModel($model, $msg, $redirect) {
         if (!$model) {
             $this->flashSession->warning($msg);
@@ -140,6 +117,14 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         }
     }
     
+    /**
+     * Elimina el modelo pasado por parametro y carga el mensaje que ha sido pasado por párametro en el flashSession,
+     * En caso de error genera una excepción
+     * @param \Phalcon\Mvc\Model $model
+     * @param String $successMsg
+     * @return boolean
+     * @throws InvalidArgumentException
+     */
     protected function deleteModel($model, $successMsg) {
         if ($model->delete()) {
             $this->flashSession->warning($successMsg);
@@ -152,6 +137,32 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         }
 
         throw new InvalidArgumentException($m);
+    }
+    
+    /**
+     * Recibe como párametro un modelo y la página que se necesita, y retorna un objeto paginador de phalcon
+     * @param \Phalcon\Mvc\Model $model
+     * @param int $page
+     * @return Phalcon\Paginator\Adapter\Model
+     */
+    protected function getPaginationWithModel($model, $page) {
+        $paginator   = new Phalcon\Paginator\Adapter\Model( array(
+            "data"  => $model,
+            "limit" => self::DEFAULT_LIMIT,
+            "page"  => $page
+        ));
+
+        return $paginator->getPaginate();
+    }
+    
+    protected function getPaginationWithQueryBuilder($builder, $page) {
+        $paginator = new Phalcon\Paginator\Adapter\QueryBuilder( array(
+            "builder" => $builder,
+            "limit"   => self::DEFAULT_LIMIT,
+            "page"    => $page
+        ));
+        
+        return $paginator->getPaginate();
     }
 }
 

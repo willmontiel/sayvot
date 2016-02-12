@@ -72,6 +72,13 @@ class AccountForm extends Form {
             'id' => 'status',
             'class' => 'onoffswitch-checkbox', 
             'id' => 'status'
-        )));		
+        )));
+        
+        $this->add(new Check('st', array(
+            'value' => 1,
+            'id' => 'status',
+            'class' => 'onoffswitch-checkbox', 
+            'id' => 'status'
+        )));
     }
 }

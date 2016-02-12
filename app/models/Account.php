@@ -1,7 +1,6 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator\PresenceOf,
-    Phalcon\Mvc\Model\Validator\Email;
+use Phalcon\Mvc\Model\Validator\Email;
 
 class Account extends BaseModel {
     public $idAccount;
@@ -21,12 +20,7 @@ class Account extends BaseModel {
     }
     
     public function validation() {
-        $this->validate(new PresenceOf( array(
-            "field"  => 'name',
-            "message" => "Debes enviar un nombre, para identificar la cuenta"
-        )));
-        
-        $this->validate(new SpaceValidator(array(
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             'field' => 'name',
             "message" => "Debes enviar un nombre, para identificar la cuenta"
         )));
@@ -36,32 +30,17 @@ class Account extends BaseModel {
             "message" => "Debes enviar una dirección de correo eléctronica válida"
         )));
         
-        $this->validate( new PresenceOf(array(
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"   => 'phone',
             "message" => "Debes un número de telefono o celular"
         )));
         
-        $this->validate(new SpaceValidator(array(
-            "field"   => 'phone',
-            "message" => "Debes un número de telefono o celular"
-        )));
-        
-        $this->validate(new PresenceOf(array(
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"  => 'address',
             "message" => "Debes enviar una dirección válida"
         )));
         
-        $this->validate(new SpaceValidator(array(
-            "field"  => 'address',
-            "message" => "Debes enviar una dirección válida"
-        )));
-        
-        $this->validate(new PresenceOf(array(
-            "field"  => 'city',
-            "message" => "Debes enviar una ciudad válida"
-        )));
-        
-        $this->validate(new SpaceValidator(array(
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"  => 'city',
             "message" => "Debes enviar una ciudad válida"
         )));

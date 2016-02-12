@@ -1,7 +1,6 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator\PresenceOf,
-    Phalcon\Mvc\Model\Validator\Numericality;
+use Phalcon\Mvc\Model\Validator\Numericality;
 
 class Currency extends BaseModel {
     public $idCurrency;
@@ -19,42 +18,22 @@ class Currency extends BaseModel {
     }
     
     public function validation() {
-        $this->validate(new PresenceOf( array(
-            "field"  => 'name',
-            "message" => "Debes enviar un nombre, para el tipo de moneda"
-        )));
-        
-        $this->validate(new SpaceValidator(array(
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             'field' => 'name',
             "message" => "Debes enviar un nombre, para el tipo de moneda"
         )));
 
-        $this->validate(new PresenceOf(array(
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"   => 'code',
             "message" => "Debes enviar un código, para el tipo de moneda"
         )));
         
-        $this->validate(new SpaceValidator(array(
-            "field"   => 'code',
-            "message" => "Debes enviar un código, para el tipo de moneda"
-        )));
-        
-        $this->validate( new PresenceOf(array(
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"   => 'simbol',
             "message" => "Debes enviar un símbolo, para el tipo de moneda"
         )));
         
-        $this->validate(new SpaceValidator(array(
-            "field"   => 'simbol',
-            "message" => "Debes enviar un símbolo, para el tipo de moneda"
-        )));
-        
-        $this->validate(new PresenceOf(array(
-            "field"  => 'value',
-            "message" => "Debes enviar un valor válido, para el TRM"
-        )));
-        
-        $this->validate(new SpaceValidator(array(
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"  => 'value',
             "message" => "Debes enviar un valor válido, para el TRM"
         )));

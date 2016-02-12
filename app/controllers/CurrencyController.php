@@ -3,22 +3,7 @@
 class CurrencyController extends ControllerBase {
     public function IndexAction() {
         $currentPage = (int) $_GET["page"];
-        
-        $currency = Currency::find();
-        
-        // Create a Model paginator, show 10 rows by page starting from $currentPage
-        $paginator   = new Phalcon\Paginator\Adapter\Model(
-            array(
-                "data"  => $currency,
-                "limit" => self::DEFAULT_LIMIT,
-                "page"  => $currentPage
-            )
-        );
-
-        // Get the paginated results
-        $page = $paginator->getPaginate();
-        
-        $this->view->setVar("page", $page);
+        $this->view->setVar("page", $this->getPaginationWithModel(Currency::find(), $currentPage));
     }
     
     public function AddAction() {
@@ -42,6 +27,7 @@ class CurrencyController extends ControllerBase {
             catch (Exception $ex) {
                 $this->flashSession->error("Ha ocurrido un error, por favor contacta al administrador");
                 $this->logger->log("Exception while creating currency: " . $ex->getTraceAsString());
+                $this->logger->log($ex->getTraceAsString());
             }
         }
     }

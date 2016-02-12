@@ -1,20 +1,11 @@
 {% extends "templates/default.volt" %}
-{% block css %}
-    {{ stylesheet_link('vendors/select2-4.0.1/css/select2.min.css') }}
-{% endblock%}
-{% block javascript %}
-    {{ javascript_include('vendors/select2-4.0.1/js/select2.min.js') }}
-    <script type="text/javascript">
-        $(function(){
-            $(".select2").select2();
-        });
-    </script>   
-{% endblock%}
-{% block title %}<i class="fa fa-instagram"></i> Cuentas {% endblock%}
+{% block css %}{% endblock%}
+{% block javascript %}{% endblock%}
+{% block title %}<i class="fa fa-instagram"></i> Cuentas{% endblock%}
 {% block content %}
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
-            <h1 class="page-header">Crea una nueva cuenta</h1>
+            <h1 class="page-header">Estas editando la cuenta <em><strong>{{account.name}}</strong></em>.</h1>
         </div>    
     </div>    
     
@@ -26,7 +17,7 @@
     
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
-            <form method="post" action="{{url('account/add')}}">
+            <form method="post" action="{{url('account/update')}}/{{account.idAccount}}">
                 <div class="form-group">
                     <label for="simbol">*Nombre de la cuenta</label>
                     {{ accountForm.render('name')}}
@@ -63,12 +54,16 @@
                 </div>
                 
                 <div class="onoffswitch">
+                    {#
                     {{ accountForm.render('status')}}
-                    <label class="onoffswitch-label" for="status">
+                    #}
+                    <input type="checkbox" id="st" class="onoffswitch-checkbox" name="st" {% if account.status == 1%} checked {% endif %} />
+                    <label class="onoffswitch-label" for="st">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>
                     </label>
                 </div> 
+                
                 <a href="{{url('account')}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                 <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
             </form>
