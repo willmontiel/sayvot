@@ -21,7 +21,6 @@ class CurrencyForm extends Form {
             'type' => 'text',
             'placeholder' => 'Código',
             'required' => 'required',
-            'autofocus' => "autofocus",
             'class' => 'form-control',
             'id' => 'code'
         )));
@@ -31,7 +30,6 @@ class CurrencyForm extends Form {
             'type' => 'text',
             'placeholder' => 'Simbolo',
             'required' => 'required',
-            'autofocus' => "autofocus",
             'class' => 'form-control',
             'id' => 'simbol'
         )));
@@ -43,7 +41,6 @@ class CurrencyForm extends Form {
             'step' => 'any',
             'placeholder' => 'Valor en Colombia',
             'required' => 'required',
-            'autofocus' => "autofocus",
             'class' => 'form-control',
             'id' => 'value'
         )));

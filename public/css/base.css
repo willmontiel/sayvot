@@ -258,12 +258,12 @@ html, body{
 .onoffswitch-inner:before {
     content: "ON";
     padding-left: 10px;
-    background-color: #667F66; color: #FFFFFF;
+    background-color: #8cc63f; color: #000;
 }
 .onoffswitch-inner:after {
     content: "OFF";
     padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
+    background-color: #EEEEEE; color: #000;
     text-align: right;
 }
 .onoffswitch-switch {
