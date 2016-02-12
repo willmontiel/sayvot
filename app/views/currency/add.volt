@@ -39,7 +39,7 @@
                 </div>
                 
                 <div class="onoffswitch">
-                    {{ currencyForm.render('status', {'class' : 'onoffswitch-checkbox', 'id' : 'status'})}}
+                    {{ currencyForm.render('status')}}
                     <label class="onoffswitch-label" for="status">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>

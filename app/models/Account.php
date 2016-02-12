@@ -3,9 +3,9 @@
 use Phalcon\Mvc\Model\Validator\PresenceOf,
     Phalcon\Mvc\Model\Validator\Email;
 
-class Accounts extends BaseModel {
-    public $idaccount;
-    public $countries_id;
+class Account extends BaseModel {
+    public $idAccount;
+    public $idCountry;
     public $createdon;
     public $updatedon;
     public $name;
@@ -17,7 +17,7 @@ class Accounts extends BaseModel {
     public $status;
     
     public function initialize() {
-        $this->belongsTo("countries_id", "Countries", "idcountry");
+        $this->belongsTo("idCountry", "Country", "idCountry");
     }
     
     public function validation() {
@@ -44,16 +44,6 @@ class Accounts extends BaseModel {
         $this->validate(new SpaceValidator(array(
             "field"   => 'phone',
             "message" => "Debes un número de telefono o celular"
-        )));
-        
-        $this->validate(new PresenceOf(array(
-            "field"   => 'status',
-            "message" => "Debes configurar un estado para la cuenta (Activa o Inactiva)"
-        )));
-        
-        $this->validate(new SpaceValidator(array(
-            "field"   => 'status',
-            "message" => "Debes configurar un estado para la cuenta (Activa o Inactiva)"
         )));
         
         $this->validate(new PresenceOf(array(

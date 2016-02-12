@@ -4,15 +4,15 @@ use Phalcon\Mvc\Model\Validator\PresenceOf,
     Phalcon\Mvc\Model\Validator\Numericality;
 
 class Priceplan extends BaseModel {
-    public $idpriceplan;
-    public $currency_id;
+    public $idPriceplan;
+    public $idCurrency;
     public $price;
     public $status;
     public $createdon;
     public $updatedon;
     
     public function initialize() {
-        $this->belongsTo("currency_id", "Currency", "idcurrency");
+        $this->belongsTo("idCurrency", "Currency", "idCurrency");
     }
     
     public function validation() {

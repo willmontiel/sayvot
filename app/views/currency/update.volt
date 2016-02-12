@@ -17,7 +17,7 @@
     
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
-            <form method="post" action="{{url('currency/update')}}/{{currency.idcurrency}}">
+            <form method="post" action="{{url('currency/update')}}/{{currency.idCurrency}}">
                 <div class="form-group">
                     <label for="name">Nombre</label>
                     {{ currencyForm.render('name')}}

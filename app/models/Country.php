@@ -1,8 +1,8 @@
 <?php
 
-class Countries extends BaseModel {
-    public $idcountry;
-    public $currency_id;
+class Country extends BaseModel {
+    public $idCountry;
+    public $idCurrency;
     public $createdon;
     public $updatedon;
     public $codtel;
@@ -10,7 +10,7 @@ class Countries extends BaseModel {
     public $status;
     
     public function initialize() {
-        $this->belongsTo("currency_id", "Currency", "idcurrency");
+        $this->belongsTo("idCurrency", "Currency", "idCurrency");
     }
 }
     

@@ -48,7 +48,7 @@ class CurrencyController extends ControllerBase {
     
     public function UpdateAction($id) {
         $currency = Currency::findFirst( array(
-            'conditions' => "idcurrency = ?0",
+            'conditions' => "idCurrency = ?0",
             'bind' => array($id)
         ));
         
@@ -80,7 +80,7 @@ class CurrencyController extends ControllerBase {
     
     public function RemoveAction($id) {
         $currency = Currency::findFirst(array(
-            'conditions' => "idcurrency = ?0",
+            'conditions' => "idCurrency = ?0",
             'bind' => array($id)
         ));
         

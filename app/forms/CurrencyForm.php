@@ -47,7 +47,8 @@ class CurrencyForm extends Form {
 		
         $this->add(new Check('status', array(
             'value' => 1,
-            'id' => 'status'
+            'id' => 'status',
+            'class' => 'onoffswitch-checkbox'
         )));		
     }
 }

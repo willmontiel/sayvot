@@ -5,10 +5,10 @@ use Phalcon\Forms\Form,
     Phalcon\Forms\Element\Select,
     Phalcon\Forms\Element\Check;
 
-class AccountsForm extends Form {
+class AccountForm extends Form {
     public function initialize() {
-        $this->add(new Select('countries_id', Countries::find(), array(
-            'using' => array('idcountry', 'name'),
+        $this->add(new Select('idCountry', Country::find(), array(
+            'using' => array('idCountry', 'name'),
             'class' => 'select2 form-control',
             'required' => 'required',
             'autofocus' => "autofocus",

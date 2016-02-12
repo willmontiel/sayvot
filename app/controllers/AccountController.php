@@ -1,13 +1,13 @@
 <?php
 
-class AccountsController extends ControllerBase {
+class AccountController extends ControllerBase {
     public function IndexAction() {
         
     }
     
     public function AddAction() {
-        $account = new Accounts();
-        $accountForm = new AccountsForm($account);
+        $account = new Account();
+        $accountForm = new AccountForm($account);
 	$this->view->accountForm = $accountForm;	
         
         if ($this->request->isPost()) {
