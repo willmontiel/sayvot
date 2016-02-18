@@ -4,6 +4,7 @@ use Phalcon\Mvc\Model\Validator\Email;
 
 class Account extends BaseModel {
     public $idAccount;
+    public $idAccountplan;
     public $idCountry;
     public $createdon;
     public $updatedon;
@@ -17,6 +18,7 @@ class Account extends BaseModel {
     
     public function initialize() {
         $this->belongsTo("idCountry", "Country", "idCountry");
+        $this->belongsTo("idAccountplan", "Accountplan", "idAccountplan");
     }
     
     public function validation() {

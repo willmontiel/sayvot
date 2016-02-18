@@ -1,10 +1,10 @@
 <?php
 
-class PriceplanController extends ControllerBase {
+class AccountplanController extends ControllerBase {
     public function IndexAction() {
         $currentPage = (int) $_GET["page"];
         
-        $currency = Priceplan::find();
+        $currency = Currency::find();
         
         // Create a Model paginator, show 10 rows by page starting from $currentPage
         $paginator   = new Phalcon\Paginator\Adapter\Model(

@@ -13,7 +13,7 @@ class Currency extends BaseModel {
     public $updatedon;
     
     public function initialize() {
-        $this->hasMany("idCurrency", "Priceplan", "idCurrency");
+        $this->hasMany("idCurrency", "Accountplan", "idCurrency");
         $this->hasMany("idCurrency", "Country", "idCurrency");
     }
     
