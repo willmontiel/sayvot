@@ -284,3 +284,23 @@ html, body{
 .alert {
     text-align: center;
 }
+
+/* Fonts */
+.extra-big {
+   font-size: 3.2em; 
+   font-weight: 700;
+}
+
+.big {
+   font-size: 2.5em;
+   font-weight: 700;
+}
+
+.medium {
+   font-size: 1.5em;
+   font-weight: 700;
+}
+
+.little {
+   font-size: 0.8em;  
+}

@@ -21,16 +21,7 @@ class AccountController extends ControllerBase {
             try {
                 $accountForm->bind($this->request->getPost(), $account);
                 $status = $accountForm->getValue('status');
-                $sendSMSAuto = $accountForm->getValue('sendSMSAuto');
-                $sendSMS = $accountForm->getValue('sendSMS');
-                $quickView = $accountForm->getValue('quickView');
-                $exportContact = $accountForm->getValue('exportContact');
-                
                 $account->status = (empty($status) ? 0 : 1);
-                $account->sendSMSAuto = (empty($sendSMSAuto) ? 0 : 1);
-                $account->sendSMS = (empty($sendSMS) ? 0 : 1);
-                $account->quickView = (empty($quickView) ? 0 : 1);
-                $account->exportContact = (empty($exportContact) ? 0 : 1);
 
                 if ($this->saveModel($account, "Se ha creado la cuenta exitosamente")) {
                     return $this->response->redirect("account");

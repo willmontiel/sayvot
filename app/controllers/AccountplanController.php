@@ -4,21 +4,12 @@ class AccountplanController extends ControllerBase {
     public function IndexAction() {
         $currentPage = (int) $_GET["page"];
         
-        $currency = Accountplan::find();
+        $builder = $this->modelsManager->createBuilder()
+            ->from('Accountplan')
+            ->leftJoin('Currency')
+            ->orderBy('Accountplan.createdon');
         
-        // Create a Model paginator, show 10 rows by page starting from $currentPage
-        $paginator   = new Phalcon\Paginator\Adapter\Model(
-            array(
-                "data"  => $currency,
-                "limit" => self::DEFAULT_LIMIT,
-                "page"  => $currentPage
-            )
-        );
-
-        // Get the paginated results
-        $page = $paginator->getPaginate();
-        
-        $this->view->setVar("page", $page);
+        $this->view->setVar("page", $this->getPaginationWithQueryBuilder($builder, $currentPage));
     }
     
     public function AddAction() {

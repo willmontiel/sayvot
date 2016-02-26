@@ -45,7 +45,7 @@
                                     <td>{{item.code}}</td>
                                     <td>{{item.simbol}} - {{item.name}}</td>
                                     <td><strong>{{item.value + 0}}</strong></td>
-                                    <td>Creado {{date('d/M/Y', item.createdon)}} <br> Actualizado {{date('d/M/Y', item.updatedon)}}</td>
+                                    <td><em><span class="small">Creado {{date('d/M/Y', item.createdon)}} <br> Actualizado {{date('d/M/Y', item.updatedon)}}</span></em></td>
                                     <td class="text-right">
                                         <a href="{{url('currency/update')}}/{{item.idCurrency}}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></i></a>
                                         <a id="show-delete-modal" data-toggle="modal" href="#delete-modal" data-id="{{url('currency/remove')}}/{{item.idCurrency}}" class="btn btn-xs btn-danger"><i class="fa fa-minus"></i></a>
