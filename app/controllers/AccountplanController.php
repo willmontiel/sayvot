@@ -4,7 +4,7 @@ class AccountplanController extends ControllerBase {
     public function IndexAction() {
         $currentPage = (int) $_GET["page"];
         
-        $currency = Currency::find();
+        $currency = Accountplan::find();
         
         // Create a Model paginator, show 10 rows by page starting from $currentPage
         $paginator   = new Phalcon\Paginator\Adapter\Model(
@@ -22,18 +22,18 @@ class AccountplanController extends ControllerBase {
     }
     
     public function AddAction() {
-        $currency = new Currency();
-        $currencyForm = new CurrencyForm($currency);
-	$this->view->currencyForm = $currencyForm;	
+        $accountPlan = new Accountplan();
+        $accountPlanForm = new AccountplanForm($accountPlan);
+	$this->view->accountPlanForm = $accountPlanForm;	
         
         if ($this->request->isPost()) {
             try {
-                $currencyForm->bind($this->request->getPost(), $currency);
-                $status = $currencyForm->getValue('status');
+                $accountPlanForm->bind($this->request->getPost(), $accountPlan);
+                $status = $accountPlanForm->getValue('status');
                 $currency->status = (empty($status) ? 0 : 1);
 
-                if ($this->saveModel($currency, "Se ha creado el tipo de moneda exitosamente")) {
-                    return $this->response->redirect("currency");
+                if ($this->saveModel($accountPlan, "Se ha creado el plan de pago exitosamente")) {
+                    return $this->response->redirect("accountplan");
                 }
             } 
             catch (InvalidArgumentException $ex) {
@@ -41,7 +41,7 @@ class AccountplanController extends ControllerBase {
             }
             catch (Exception $ex) {
                 $this->flashSession->error("Ha ocurrido un error, por favor contacta al administrador");
-                $this->logger->log("Exception while creating currency: " . $ex->getTraceAsString());
+                $this->logger->log("Exception while creating accountplan: " . $ex->getTraceAsString());
             }
         }
     }

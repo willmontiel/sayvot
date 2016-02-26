@@ -1,6 +1,7 @@
 <?php
 use Phalcon\Forms\Form,
     Phalcon\Forms\Element\Select,
+    Phalcon\Forms\Element\Text,
     Phalcon\Forms\Element\Numeric,
     Phalcon\Forms\Element\Check;
 
