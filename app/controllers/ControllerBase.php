@@ -164,5 +164,13 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         
         return $paginator->getPaginate();
     }
+    
+    protected function validateBoolean($value) {
+        return (empty($value) ? 0 : 1);
+    }
+    
+    protected function validateNumber($value) {
+        return (empty($value) || $value == 0 ? 0 : $value);
+    }
 }
 

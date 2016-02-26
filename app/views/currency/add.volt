@@ -38,13 +38,17 @@
                     {{ currencyForm.render('value')}}
                 </div>
                 
-                <div class="onoffswitch">
-                    {{ currencyForm.render('status')}}
-                    <label class="onoffswitch-label" for="status">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
+                <div class="form-group">
+                    <label for="exportContact">*Estado</label>
+                    <div class="onoffswitch">
+                        {{ currencyForm.render('status')}}
+                        <label class="onoffswitch-label" for="status">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div> 
                 </div> 
+                    
                 <a href="{{url('currency')}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                 <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
             </form>

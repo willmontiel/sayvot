@@ -1,6 +1,15 @@
 {% extends "templates/default.volt" %}
-{% block css %}{% endblock%}
-{% block javascript %}{% endblock%}
+{% block css %}
+    {{ stylesheet_link('vendors/select2-4.0.1/css/select2.min.css') }}
+{% endblock%}
+{% block javascript %}
+    {{ javascript_include('vendors/select2-4.0.1/js/select2.min.js') }}
+    <script type="text/javascript">
+        $(function () {
+            $(".select2").select2();
+        });
+    </script>    
+{% endblock%}
 {% block title %}<i class="fa fa-instagram"></i> Planes de pago{% endblock%}
 {% block content %}
     <div class="row">
@@ -97,13 +106,17 @@
                     {{ accountPlanForm.render('price')}}
                 </div>
                 
-                <div class="onoffswitch">
-                    {{ accountPlanForm.render('status')}}
-                    <label class="onoffswitch-label" for="status">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                </div> 
+                <div class="form-group">
+                    <label for="exportContact">*Estado</label>
+                    <div class="onoffswitch">
+                        {{ accountPlanForm.render('status')}}
+                        <label class="onoffswitch-label" for="status">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div> 
+                </div>
+                        
                 <a href="{{url('accountplan')}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                 <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
             </form>

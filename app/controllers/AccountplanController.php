@@ -29,8 +29,16 @@ class AccountplanController extends ControllerBase {
         if ($this->request->isPost()) {
             try {
                 $accountPlanForm->bind($this->request->getPost(), $accountPlan);
-                $status = $accountPlanForm->getValue('status');
-                $currency->status = (empty($status) ? 0 : 1);
+                
+                $accountPlan->status = $this->validateBoolean($accountPlanForm->getValue('status'));
+                $accountPlan->sendSMSAuto = $this->validateBoolean($accountPlanForm->getValue('sendSMSAuto'));
+                $accountPlan->sendSMS = $this->validateBoolean($accountPlanForm->getValue('sendSMS'));
+                $accountPlan->quickView = $this->validateBoolean($accountPlanForm->getValue('quickView'));
+                $accountPlan->exportContact = $this->validateBoolean($accountPlanForm->getValue('exportContact'));
+                $accountPlan->sitesQuantity = $this->validateNumber($accountPlanForm->getValue('sitesQuantity'));
+                $accountPlan->surveyQuantity = $this->validateNumber($accountPlanForm->getValue('surveyQuantity'));
+                $accountPlan->questionQuantity = $this->validateNumber($accountPlanForm->getValue('questionQuantity'));
+                $accountPlan->userQuantity = $this->validateNumber($accountPlanForm->getValue('userQuantity'));
 
                 if ($this->saveModel($accountPlan, "Se ha creado el plan de pago exitosamente")) {
                     return $this->response->redirect("accountplan");
