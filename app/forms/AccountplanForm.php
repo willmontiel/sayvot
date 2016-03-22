@@ -17,11 +17,11 @@ class AccountplanForm extends Form {
             'id' => 'name'
         )));
         
-        $this->add(new Select('idCurrency', Currency::find(), array(
-            'using' => array('idCurrency', 'name'),
+        $this->add(new Select('idCountry', Country::find(), array(
+            'using' => array('idCountry', 'name'),
             'class' => 'form-control select2',
             'required' => 'required',
-            'id' => 'idCurrency'
+            'id' => 'idCountry'
         )));
         
         $this->add(new Numeric('surveyQuantity', array(
@@ -58,6 +58,12 @@ class AccountplanForm extends Form {
             'required' => 'required',
             'class' => 'form-control',
             'id' => 'sitesQuantity'
+        )));
+        
+        $this->add(new Check('advertising', array(
+            'value' => 1,
+            'id' => 'advertising',
+            'class' => 'onoffswitch-checkbox',
         )));
         
         $this->add(new Check('sendSMS', array(

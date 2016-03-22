@@ -6,7 +6,7 @@ class CurrencyController extends ControllerBase {
         $this->view->setVar("page", $this->getPaginationWithModel(Currency::find(), $currentPage));
     }
     
-    public function AddAction() {
+    public function addAction() {
         $currency = new Currency();
         $currencyForm = new CurrencyForm($currency);
 	$this->view->currencyForm = $currencyForm;	
@@ -32,7 +32,7 @@ class CurrencyController extends ControllerBase {
         }
     }
     
-    public function UpdateAction($id) {
+    public function updateAction($id) {
         $currency = Currency::findFirst( array(
             'conditions' => "idCurrency = ?0",
             'bind' => array($id)
@@ -64,7 +64,7 @@ class CurrencyController extends ControllerBase {
         }
     }
     
-    public function RemoveAction($id) {
+    public function removeAction($id) {
         $currency = Currency::findFirst(array(
             'conditions' => "idCurrency = ?0",
             'bind' => array($id)
@@ -84,9 +84,5 @@ class CurrencyController extends ControllerBase {
         }
         
         return $this->response->redirect("currency");
-    }
-    
-    public function DeactivateAction() {
-        
     }
 }

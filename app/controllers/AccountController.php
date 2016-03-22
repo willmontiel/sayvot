@@ -1,7 +1,7 @@
 <?php
 
 class AccountController extends ControllerBase {
-    public function IndexAction() {
+    public function indexAction() {
         $currentPage = (int) $_GET["page"];
         
         $builder = $this->modelsManager->createBuilder()
@@ -12,7 +12,7 @@ class AccountController extends ControllerBase {
         $this->view->setVar("page", $this->getPaginationWithQueryBuilder($builder, $currentPage));
     }
     
-    public function AddAction() {
+    public function addAction() {
         $account = new Account();
         $accountForm = new AccountForm($account);
 	$this->view->accountForm = $accountForm;	
@@ -38,7 +38,7 @@ class AccountController extends ControllerBase {
         }
     }
     
-    public function UpdateAction($id) {
+    public function updateAction($id) {
         $account = Account::findFirst(array('conditions' => "idAccount = ?0", 'bind' => array($id)));
         $this->validateModel($account, "No existe una cuenta con el id: {$id}", "account");
         

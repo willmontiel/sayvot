@@ -6,13 +6,14 @@ class AccountplanController extends ControllerBase {
         
         $builder = $this->modelsManager->createBuilder()
             ->from('Accountplan')
-            ->leftJoin('Currency')
+            ->leftJoin('Country')
+            ->leftJoin('Currency', 'Currency.idCurrency = Country.idCurrency')
             ->orderBy('Accountplan.createdon');
         
         $this->view->setVar("page", $this->getPaginationWithQueryBuilder($builder, $currentPage));
     }
     
-    public function AddAction() {
+    public function addAction() {
         $accountPlan = new Accountplan();
         $accountPlanForm = new AccountplanForm($accountPlan);
 	$this->view->accountPlanForm = $accountPlanForm;	
@@ -22,6 +23,7 @@ class AccountplanController extends ControllerBase {
                 $accountPlanForm->bind($this->request->getPost(), $accountPlan);
                 
                 $accountPlan->status = $this->validateBoolean($accountPlanForm->getValue('status'));
+                $accountPlan->advertising = $this->validateBoolean($accountPlanForm->getValue('advertising'));
                 $accountPlan->sendSMSAuto = $this->validateBoolean($accountPlanForm->getValue('sendSMSAuto'));
                 $accountPlan->sendSMS = $this->validateBoolean($accountPlanForm->getValue('sendSMS'));
                 $accountPlan->quickView = $this->validateBoolean($accountPlanForm->getValue('quickView'));
@@ -45,26 +47,35 @@ class AccountplanController extends ControllerBase {
         }
     }
     
-    public function UpdateAction($id) {
-        $currency = Currency::findFirst( array(
-            'conditions' => "idcurrency = ?0",
+    public function updateAction($id) {
+        $accountplan = Accountplan::findFirst( array(
+            'conditions' => "idAccountplan = ?0",
             'bind' => array($id)
         ));
         
-        $this->validateModel($currency, "No existe un tipo de moneda con el id: {$id}", "currency");
+        $this->validateModel($accountplan, "No existe un plan de pago con el id: {$id}", "accountplan");
         
-        $currencyForm = new CurrencyForm($currency);
-	$this->view->currencyForm = $currencyForm;
-        $this->view->setVar("currency", $currency);
+        $accountplanForm = new AccountplanForm($accountplan);
+	$this->view->accountPlanForm = $accountplanForm;
+        $this->view->setVar("accountplan", $accountplan);
         
         if ($this->request->isPost()) {
             try {
-                $currencyForm->bind($this->request->getPost(), $currency);
-                $status = $currencyForm->getValue('st');
-                $currency->status = (empty($status) ? 0 : 1);
+                $accountplanForm->bind($this->request->getPost(), $accountplan);
+                
+                $accountPlan->status = $this->validateBoolean($accountplanForm->getValue('status'));
+                $accountPlan->advertising = $this->validateBoolean($accountplanForm->getValue('advertising'));
+                $accountPlan->sendSMSAuto = $this->validateBoolean($accountplanForm->getValue('sendSMSAuto'));
+                $accountPlan->sendSMS = $this->validateBoolean($accountplanForm->getValue('sendSMS'));
+                $accountPlan->quickView = $this->validateBoolean($accountplanForm->getValue('quickView'));
+                $accountPlan->exportContact = $this->validateBoolean($accountplanForm->getValue('exportContact'));
+                $accountPlan->sitesQuantity = $this->validateNumber($accountplanForm->getValue('sitesQuantity'));
+                $accountPlan->surveyQuantity = $this->validateNumber($accountplanForm->getValue('surveyQuantity'));
+                $accountPlan->questionQuantity = $this->validateNumber($accountplanForm->getValue('questionQuantity'));
+                $accountPlan->userQuantity = $this->validateNumber($accountplanForm->getValue('userQuantity'));
 
-                if ($this->saveModel($currency, "Se ha editado la moneda <em><strong>{$currency->name}</strong></em> exitosamente")) {
-                    return $this->response->redirect("currency");
+                if ($this->saveModel($accountplan, "Se ha editado la el plan de pago <em><strong>{$accountplan->name}</strong></em> exitosamente")) {
+                    return $this->response->redirect("accountplan");
                 }
             }
             catch (InvalidArgumentException $ex) {
@@ -72,12 +83,12 @@ class AccountplanController extends ControllerBase {
             }
             catch (Exception $ex) {
                 $this->flashSession->error("Ha ocurrido un error, por favor contacta al administrador");
-                $this->logger->log("Exception while creating currency: " . $ex->getTraceAsString());
+                $this->logger->log("Exception while updating accountplan : " . $ex->getTraceAsString());
             }
         }
     }
     
-    public function RemoveAction($id) {
+    public function removeAction($id) {
         $currency = Currency::findFirst(array(
             'conditions' => "idcurrency = ?0",
             'bind' => array($id)
@@ -99,7 +110,7 @@ class AccountplanController extends ControllerBase {
         return $this->response->redirect("currency");
     }
     
-    public function DeactivateAction() {
+    public function deactivateAction() {
         
     }
 }

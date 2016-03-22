@@ -2,7 +2,7 @@
 
 class State extends BaseModel {
     public $idState;
-    public $idCurrency;
+    public $idCountry;
     public $createdon;
     public $updatedon;
     public $codtel;
@@ -10,7 +10,7 @@ class State extends BaseModel {
     public $status;
     
     public function initialize() {
-        $this->belongsTo("idCurrency", "Currency", "idCurrency");
+        $this->belongsTo("idCountry", "Country", "idCountry");
         $this->hasMany("idState", "City", "idState");
     }
 }

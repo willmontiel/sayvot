@@ -42,13 +42,14 @@
                                     <td>{{item.idAccountplan}}</td>
                                     <td>
                                         <span class="medium">{{item.name}}</span> <br>
-                                        {{item.currency.simbol}}{{item.price + 0}} <br>
-                                        {{item.currency.name}}<br>
+                                        {{item.country.currency.simbol}}{{item.price + 0}} <br>
+                                        {{item.country.currency.name}}<br>
                                         <em>
                                             <span class="little">
                                                 Creado {{date('d/M/Y H:s', item.createdon)}}, Actualizado {{date('d/M/Y H:s', item.updatedon)}}
                                             </span>
-                                        </em>
+                                        </em> <br>
+                                        {{item.country.name}}
                                     </td>
                                     <td>
                                         <ul>
@@ -60,6 +61,11 @@
                                             </li>
                                             <li>
                                                 Usuarios: {{item.userQuantity}}
+                                            </li>
+                                            <li>
+                                                <span class="label label-{% if item.advertising == 0%}danger{% else %}success{% endif %}" style="font-weight: 300;">
+                                                    Publicidad en app
+                                                </span>
                                             </li>
                                             <li>
                                                 <span class="label label-{% if item.sendSMSAuto == 0%}danger{% else %}success{% endif %}" style="font-weight: 300;">

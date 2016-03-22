@@ -14,7 +14,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
-            <h1 class="page-header">Registra un plan de pago con las caracteristicas que necesites.</h1>
+            <h1 class="page-header">Edita la configuración del plan de pago <em>{{accountplan.name}}</em>.</h1>
         </div>    
     </div>    
     
@@ -26,7 +26,7 @@
     
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
-            <form method="post" action="{{url('accountplan/add')}}">
+            <form method="post" action="{{url('accountplan/update')}}/{{accountplan.idAccountplan}}">
                 <div class="form-group">
                     <label for="name">*Nombre</label>
                     {{ accountPlanForm.render('name')}}
@@ -134,3 +134,4 @@
         </div>    
     </div>    
 {% endblock %}
+

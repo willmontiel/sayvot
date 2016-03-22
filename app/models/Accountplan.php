@@ -6,9 +6,8 @@ use \Sayvot\Validators\SpaceValidator,
 
 class Accountplan extends BaseModel {
     public $idAccountplan;
-    public $idCurrency;
-    public $idAutomatedsmsplan;
-    public $idAdvertising;
+    public $idCountry;
+    public $advertising;
     public $surveyQuantity;
     public $questionQuantity;
     public $userQuantity;
@@ -24,7 +23,8 @@ class Accountplan extends BaseModel {
     public $name;
     
     public function initialize() {
-        $this->belongsTo("idCurrency", "Currency", "idCurrency");
+        $this->belongsTo("idCountry", "Country", "idCountry");
+        $this->hasMany("idAccountplan", "Account", "idAccountplan");
     }
     
     public function validation() {
@@ -33,40 +33,20 @@ class Accountplan extends BaseModel {
             "message" => "Debes enviar una cantidad válida(númerica) de encuestas disponibles para este plan"
         )));
         
-//        $this->validate(new SpaceValidator(array(
-//            'field' => 'surveyQuantity',
-//            "message" => "Debes enviar la cantidad de encuestas disponibles para este plan"
-//        )));
-        
         $this->validate(new Numericality(array(
             "field"   => 'questionQuantity',
             "message" => "Debes enviar la cantidad válida(númerica) de preguntas disponibles para cada encuesta de este plan"
         )));
-        
-//        $this->validate(new SpaceValidator(array(
-//            'field' => 'questionQuantity',
-//            "message" => "Debes enviar la cantidad de preguntas disponibles para cada encuesta de este plan"
-//        )));
         
         $this->validate(new Numericality(array(
             "field"   => 'userQuantity',
             "message" => "Debes enviar la cantidad válida (númerica) de usuarios disponibles que pueden administrar la cuenta"
         )));
         
-//        $this->validate(new SpaceValidator(array(
-//            'field' => 'userQuantity',
-//            "message" => "Debes enviar la cantidad de usuarios disponibles que pueden administrar la cuenta"
-//        )));
-        
         $this->validate(new Numericality(array(
             "field"   => 'sitesQuantity',
             "message" => "Debes enviar la cantidad válida (númerica) de sitios disponibles que serán evualadas al momento de enviar el SMS automático"
         )));
-//        
-//        $this->validate(new SpaceValidator(array(
-//            'field' => 'sitesQuantity',
-//            "message" => "Debes enviar la cantidad de sitios disponibles que serán evualadas al momento de enviar el SMS automático"
-//        )));
         
         $this->validate(new Numericality(array(
             'field' => 'price',
