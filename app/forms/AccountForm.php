@@ -12,7 +12,23 @@ class AccountForm extends Form {
             'class' => 'select2 form-control',
             'required' => 'required',
             'autofocus' => "autofocus",
-            'id' => 'countries_id'
+            'id' => 'idCountry'
+        )));
+        
+        $this->add(new Select('idAccounttype', Accounttype::find(), array(
+            'using' => array('idAccounttype', 'name'),
+            'class' => 'select2 form-control',
+            'required' => 'required',
+            'autofocus' => "autofocus",
+            'id' => 'idAccounttype'
+        )));
+        
+        $this->add(new Select('idAccountplan', Accountplan::find(), array(
+            'using' => array('idAccountplan', 'name'),
+            'class' => 'select2 form-control',
+            'required' => 'required',
+            'autofocus' => "autofocus",
+            'id' => 'idAccountplan'
         )));
         
         $this->add(new Text('name', array(
@@ -68,13 +84,6 @@ class AccountForm extends Form {
         )));
 		
         $this->add(new Check('status', array(
-            'value' => 1,
-            'id' => 'status',
-            'class' => 'onoffswitch-checkbox', 
-            'id' => 'status'
-        )));
-        
-        $this->add(new Check('st', array(
             'value' => 1,
             'id' => 'status',
             'class' => 'onoffswitch-checkbox', 

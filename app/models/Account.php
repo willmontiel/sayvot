@@ -1,10 +1,12 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator\Email;
+use Phalcon\Mvc\Model\Validator\Email,
+    Phalcon\Mvc\Model\Validator\Uniqueness;
 
 class Account extends BaseModel {
     public $idAccount;
     public $idAccountplan;
+    public $idAccounttype;
     public $idCountry;
     public $createdon;
     public $updatedon;
@@ -19,6 +21,7 @@ class Account extends BaseModel {
     public function initialize() {
         $this->belongsTo("idCountry", "Country", "idCountry");
         $this->belongsTo("idAccountplan", "Accountplan", "idAccountplan");
+        $this->belongsTo("idAccounttype", "Accounttype", "idAccounttype");
     }
     
     public function validation() {
@@ -27,6 +30,11 @@ class Account extends BaseModel {
             "message" => "Debes enviar un nombre, para identificar la cuenta"
         )));
 
+        $this->validate(new Uniqueness(array(
+            'field' => 'name',
+            "message" => "Ya existe una cuenta con el nombre ingresado"
+        )));
+        
         $this->validate(new Email(array(
             "field"   => 'email',
             "message" => "Debes enviar una dirección de correo eléctronica válida"

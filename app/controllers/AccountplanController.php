@@ -89,28 +89,43 @@ class AccountplanController extends ControllerBase {
     }
     
     public function removeAction($id) {
-        $currency = Currency::findFirst(array(
-            'conditions' => "idcurrency = ?0",
+        $accountplan = Accountplan::findFirst(array(
+            'conditions' => "idAccountplan = ?0",
             'bind' => array($id)
         ));
         
-        $this->validateModel($currency, "No existe un tipo de moneda con el id: {$id}", "currency");
+        $this->validateModel($accountplan, "No existe un plan de pago con el id: {$id}", "accountplan");
         
         try {
-            $this->deleteModel($currency, "Se ha eliminado el tipo de moneda <em><strong>{$currency->name}</strong></em> exitosamente");
+            $this->deleteModel($accountplan, "Se ha eliminado el plan de pago <em><strong>{$accountplan->name}</strong></em> exitosamente");
         } 
         catch (InvalidArgumentException $ex) {
             $this->flashSession->error($ex->getMessage());
         }
         catch (Exception $ex) {
-            $this->logger->log("Exception while deleting currency: " . $ex->getTraceAsString());
-            $this->flashSession->error("No ha sido posible eliminar el tipo de moneda, por favor contacta al administrador");
+            $this->logger->log("Exception while deleting accountplan: " . $ex->getTraceAsString());
+            $this->flashSession->error("No ha sido posible eliminar el plan de pago, por favor contacta al administrador");
         }
         
-        return $this->response->redirect("currency");
+        return $this->response->redirect("accountplan");
     }
     
     public function deactivateAction() {
         
+    }
+    
+    public function getplansbycountryAction($idCountry) {
+        $aps = Accountplan::find(array("conditions" => "idCountry = ?0", "bind" => array($idCountry)));
+        $accountplans = array();
+        
+        foreach ($aps as $value) {
+            $obj = new stdClass();
+            $obj->idAccountplan = $value->idAccountplan;
+            $obj->name = $value->name;
+            
+            $accountplans[] = $obj;
+        }
+        
+        return $this->setJsonResponse($accountplans, 200);
     }
 }
