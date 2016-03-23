@@ -125,6 +125,37 @@ html, body{
     margin: 0;
 }
 
+
+.style-footer-clear {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 9999999;
+}
+
+.social-networks-clear {
+    float: right;
+    padding: 5px;
+}
+
+.social-networks-clear li {
+    list-style-type: none;
+    float: right;
+    font-size: 1.5em;
+    margin: 0 5px 0 5px;
+}
+
+.social-networks-clear li:hover {
+    cursor: pointer;
+    color: #43586b;
+}
+
+.social-networks-clear i {
+    margin: 10px;
+}
+
+
 .style-footer {
     width: 100%;
     background-color: white;
@@ -303,4 +334,8 @@ html, body{
 
 .little {
    font-size: 0.8em;  
+}
+
+.select2-container{ 
+    width: 100% !important;
 }

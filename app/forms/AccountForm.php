@@ -9,7 +9,7 @@ class AccountForm extends Form {
     public function initialize() {
         $this->add(new Select('idCountry', Country::find(), array(
             'using' => array('idCountry', 'name'),
-            'class' => 'select2 form-control',
+            'class' => 'form-control',
             'required' => 'required',
             'autofocus' => "autofocus",
             'id' => 'idCountry'
@@ -17,18 +17,13 @@ class AccountForm extends Form {
         
         $this->add(new Select('idAccounttype', Accounttype::find(), array(
             'using' => array('idAccounttype', 'name'),
-            'class' => 'select2 form-control',
+            'class' => 'form-control',
             'required' => 'required',
-            'autofocus' => "autofocus",
             'id' => 'idAccounttype'
         )));
         
-        $this->add(new Select('idAccountplan', Accountplan::find(), array(
-            'using' => array('idAccountplan', 'name'),
-            'class' => 'select2 form-control',
-            'required' => 'required',
-            'autofocus' => "autofocus",
-            'id' => 'idAccountplan'
+        $this->add(new Select('idAccountplan', array(
+            
         )));
         
         $this->add(new Text('name', array(

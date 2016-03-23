@@ -1,6 +1,12 @@
 <?php
 
 class SessionController extends ControllerBase {
+    public function signupAction() {
+        $account = new Account();
+        $accountForm = new AccountForm($account);
+	$this->view->accountForm = $accountForm;
+    }
+    
     public function logoutAction() {
         $this->session->remove("user-name");
         $this->session->destroy();

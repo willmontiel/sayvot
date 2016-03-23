@@ -21,7 +21,7 @@ class AccountController extends ControllerBase {
             try {
                 $accountForm->bind($this->request->getPost(), $account);
                 $status = $accountForm->getValue('status');
-                $account->status = (empty($status) ? 0 : 1);
+                $account->status = 1;
 
                 if ($this->saveModel($account, "Se ha creado la cuenta exitosamente")) {
                     return $this->response->redirect("account");

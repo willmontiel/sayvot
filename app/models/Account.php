@@ -55,6 +55,11 @@ class Account extends BaseModel {
             "message" => "Debes enviar una ciudad válida"
         )));
         
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
+            'field' => 'idAccountplan',
+            "message" => "Debes seleccionar un plan de pago"
+        )));
+        
         return $this->validationHasFailed() != true;
     }
 }

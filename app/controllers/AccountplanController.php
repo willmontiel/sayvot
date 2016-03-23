@@ -120,12 +120,44 @@ class AccountplanController extends ControllerBase {
         
         foreach ($aps as $value) {
             $obj = new stdClass();
-            $obj->idAccountplan = $value->idAccountplan;
-            $obj->name = $value->name;
+            $obj->id = $value->idAccountplan;
+            $obj->text = $value->name;
             
             $accountplans[] = $obj;
         }
         
         return $this->setJsonResponse($accountplans, 200);
+    }
+    
+    public function getplandataAction($idAccountplan) {
+        $aps = $this->modelsManager->createBuilder()
+            ->from('Accountplan')
+            ->leftJoin('Country')
+            ->leftJoin('Currency', 'Currency.idCurrency = Country.idCurrency')
+            ->where('Accountplan.idAccountplan = :idAccountplan:', array('idAccountplan' => $idAccountplan))
+            ->getQuery()
+            ->execute();
+        
+        $accountplan = array();
+        
+        foreach ($aps as $ap) {
+            $price = $ap->price + 0;
+            $accountplan['idAccounplan'] = $ap->idAccountplan;
+            $accountplan['name'] = $ap->name;
+            $accountplan['price'] = $ap->country->currency->simbol . $price;
+            $accountplan['currency'] = $ap->country->currency->name;
+            $accountplan['surveyQuantity'] = $ap->surveyQuantity;
+            $accountplan['questionQuantity'] = $ap->questionQuantity;
+            $accountplan['userQuantity'] = $ap->userQuantity;
+            $accountplan['advertising'] = $ap->advertising;
+            $accountplan['sendSMSAuto'] = $ap->sendSMSAuto;
+            $accountplan['sitesQuantity'] = $ap->sitesQuantity;
+            $accountplan['sendSMS'] = $ap->sendSMS;
+            $accountplan['exportContact'] = $ap->exportContact;
+        }
+        
+        sleep(4);
+        
+        return $this->setJsonResponse($accountplan, 200);
     }
 }
