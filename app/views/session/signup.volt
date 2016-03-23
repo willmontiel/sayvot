@@ -10,7 +10,7 @@
     {{ javascript_include('vendors/select2-4.0.1/js/select2.min.js') }}
     <script type="text/javascript">
         $(function(){
-            var id = 0;
+            var id = 1;
             $(".select2").select2();
            
             $('#idAccounttype').select2().on("select2:select", function(e) {
@@ -92,7 +92,7 @@
                         	</h3>
                     	</div>
                     	<ul>
-                            {#<li><a href="#profile" data-toggle="tab">Perfil</a></li>#}
+                            <li><a href="#profile" data-toggle="tab">Perfil</a></li>
                             <li><a href="#account" data-toggle="tab">Cuenta</a></li>
                         </ul>
                         <div class="tab-content">
@@ -102,7 +102,7 @@
                                   <div class="col-sm-4 col-sm-offset-1">
                                      <div class="picture-container">
                                           <div class="picture">
-                                              <img src="/wizard/assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
+                                              <img src="{{url('')}}images/general/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
                                               <input type="file" id="wizard-picture">
                                           </div>
                                           <h6>Choose Picture</h6>
@@ -235,14 +235,14 @@
                             </div>
                         </div>
                         <div class="wizard-footer">
-                            	<div class="pull-right">
-                                    <input type='button' class='btn btn-next btn-success' name='next' value='Siguiente' />
-                                    <input type='button' class='btn btn-finish btn-success' name='finish' value='Finalizar' />
-                                </div>
-                                <div class="pull-left">
-                                    <input type='button' class='btn btn-previous btn-default btn-sm' name='previous' value='Atras' />
-                                </div>
-                                <div class="clearfix"></div>
+                            <div class="pull-right">
+                                <input type='button' class='btn btn-next btn-success' name='next' value='Siguiente' />
+                                <input type='button' class='btn btn-finish btn-success' name='finish' value='Finalizar' />
+                            </div>
+                            <div class="pull-left">
+                                <input type='button' class='btn btn-previous btn-default btn-sm' name='previous' value='Atras' />
+                            </div>
+                            <div class="clearfix"></div>
                         </div>	
                     </form>
                 </div>

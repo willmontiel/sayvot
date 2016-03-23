@@ -1,39 +1,36 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator\Email,
-    Phalcon\Mvc\Model\Validator\Uniqueness;
-
-class Account extends BaseModel {
+class User extends BaseModel {
+    public $idUser;
+    public $idCredential;
     public $idAccount;
-    public $idAccountplan;
-    public $idAccounttype;
-    public $idCountry;
-    public $createdon;
+    public $agree;
     public $updatedon;
+    public $createdon;
+    public $status;
     public $name;
+    public $lastname;
     public $email;
+    public $country;
+    public $state;
+    public $city;
     public $phone;
     public $address;
-    public $nit;
-    public $city;
-    public $status;
     
     public function initialize() {
-        $this->belongsTo("idCountry", "Country", "idCountry");
-        $this->belongsTo("idAccountplan", "Accountplan", "idAccountplan");
-        $this->belongsTo("idAccounttype", "Accounttype", "idAccounttype");
-        $this->hasMany("idAccount", "User", "idAccount");
+        $this->hasOne("idCredential", "Credential", "idCredential");
+        $this->belongsTo("idAccount", "Account", "idAccount");
     }
     
     public function validation() {
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             'field' => 'name',
-            "message" => "Debes enviar un nombre, para identificar la cuenta"
+            "message" => "Debes enviar tu nombre completo"
         )));
-
-        $this->validate(new Uniqueness(array(
-            'field' => 'name',
-            "message" => "Ya existe una cuenta con el nombre ingresado"
+        
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
+            'field' => 'lastname',
+            "message" => "Debes enviar tus apellidos"
         )));
         
         $this->validate(new Email(array(
@@ -57,11 +54,15 @@ class Account extends BaseModel {
         )));
         
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
-            'field' => 'idAccountplan',
-            "message" => "Debes seleccionar un plan de pago"
+            "field"  => 'country',
+            "message" => "Debes enviar un país válido"
+        )));
+        
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
+            "field"  => 'state',
+            "message" => "Debes enviar un estado, departamento o provincia válida"
         )));
         
         return $this->validationHasFailed() != true;
     }
 }
-
