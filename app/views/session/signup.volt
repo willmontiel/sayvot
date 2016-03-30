@@ -84,12 +84,18 @@
                 <div class="card wizard-card ct-wizard-green" id="wizard">
                     <form action="" method="">
                 <!--        You can switch "ct-wizard-orange"  with one of the next bright colors: "ct-wizard-blue", "ct-wizard-green", "ct-wizard-orange", "ct-wizard-red"             -->
-                
-                    	<div class="wizard-header">
-                        	<h3>
-                        	   <b>Registra</b> tu perfil <br>
-                        	   <small>Y comienza a encuestar a tu público al instante</small>
-                        	</h3>
+                        <div class="wizard-header">
+                            <a href="http://creative-tim.com">
+                                <div class="logo-container">
+                                   <div class="logo">
+                                       <img src="{{url('')}}images/sayvot-logo.png" width="100">
+                                   </div>
+                               </div>
+                            </a>
+                            <h3>
+                               <b>Registra</b> tu perfil <br>
+                               <small>Y comienza a encuestar a tu público al instante</small>
+                            </h3>
                     	</div>
                     	<ul>
                             <li><a href="#profile" data-toggle="tab">Perfil</a></li>
@@ -98,7 +104,7 @@
                         <div class="tab-content">
                             <div class="tab-pane" id="profile">
                               <div class="row">
-                                  <h4 class="info-text"> Let's start with the basic information (with validation)</h4>
+                                  <h4 class="info-text"> Empecemos con la información básica (los campos con * son obligatorios)</h4>
                                   <div class="col-sm-4 col-sm-offset-1">
                                      <div class="picture-container">
                                           <div class="picture">
@@ -110,18 +116,49 @@
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-group">
-                                        <label>First Name <small>(required)</small></label>
-                                        <input name="firstname" type="text" class="form-control" placeholder="Andrew...">
+                                          <label>*Nombre(s)</label>
+                                        {{ userForm.render('name')}}
                                       </div>
+                                      
                                       <div class="form-group">
-                                        <label>Last Name <small>(required)</small></label>
-                                        <input name="lastname" type="text" class="form-control" placeholder="Smith...">
+                                          <label>*Apellido(s)</label>
+                                        {{ userForm.render('lastname')}}
                                       </div>
                                   </div>
                                   <div class="col-sm-10 col-sm-offset-1">
                                       <div class="form-group">
-                                          <label>Email <small>(required)</small></label>
-                                          <input name="email" type="email" class="form-control" placeholder="andrew@creative-tim.com">
+                                          <label>*Dirección de correo eléctronico*</label>
+                                        {{ userForm.render('email')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Télefono o Celular</label>
+                                        {{ userForm.render('phone')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Dirección</label>
+                                        {{ userForm.render('address')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*País</label>
+                                        {{ userForm.render('idCountry')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Nombre de usuario (se usará para iniciar sesión)</label>
+                                        {{ userForm.render('username')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Contraseña</label>
+                                        {{ userForm.render('pass1')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Confirma tu contraseña</label>
+                                        {{ userForm.render('pass2')}}
                                       </div>
                                   </div>
                               </div>
@@ -229,6 +266,11 @@
                                                     </tbody>
                                                 </table> 
                                             </div>
+                                        </div>
+                                            
+                                        <div class="form-group">
+                                            <label>*Estoy de acuerdo con las politicas</label>
+                                            {{ userForm.render('agree')}}
                                         </div>
                                     </div>
                                 </div>

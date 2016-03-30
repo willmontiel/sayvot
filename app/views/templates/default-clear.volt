@@ -13,14 +13,6 @@
     </head>
     <body>
         <div class="image-container set-full-height" style="background-image: url('{{url('')}}images/backgrounds/city.jpg')">
-            <a href="http://creative-tim.com">
-                <div class="logo-container">
-                   <div class="logo">
-                       <img src="{{url('')}}images/sayvot-logo.png" width="130">
-                   </div>
-               </div>
-            </a>
-            
             <div class="container-fluid fill">
                 <div class="row fill">
                     <div class="col-sm-12 col-md-12 col-lg-12">

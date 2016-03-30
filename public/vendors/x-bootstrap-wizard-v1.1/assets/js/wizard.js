@@ -89,59 +89,48 @@ function validateFirstStep(){
     
     $(".wizard-card form").validate({
 		rules: {
-			firstname: "required",
+			name: "required",
 			lastname: "required",
 			email: {
 				required: true,
 				email: true
 			}
-			
-/*  other possible input validations
 			,username: {
 				required: true,
-				minlength: 2
+				minlength: 4
 			},
-			password: {
+			pass1: {
 				required: true,
-				minlength: 5
+				minlength: 6
 			},
-			confirm_password: {
+			pass2: {
 				required: true,
-				minlength: 5,
-				equalTo: "#password"
+				minlength: 6,
+				equalTo: "#pass1"
 			},
-		
-			topic: {
-				required: "#newsletter:checked",
-				minlength: 2
-			},
-			agree: "required"
-*/			
+	
+			agree: "required"			
 
 		},
 		messages: {
-			firstname: "Please enter your First Name",
-			lastname: "Please enter your Last Name",
-			email: "Please enter a valid email address",
+			name: "Por favor ingresa tu(s) nombre(s)",
+			lastname: "Por favor ingresa tu(s) apellido(s)",
+			email: "Por favor ingresa una dirección de correo eléctronico valida",
 
-/*   other posible validation messages
 			username: {
-				required: "Please enter a username",
-				minlength: "Your username must consist of at least 2 characters"
+				required: "Por favor ingresa un nombre de usuario",
+				minlength: "Tu nombre de usuario debe tener al menos 4 caracteres"
 			},
-			password: {
-				required: "Please provide a password",
-				minlength: "Your password must be at least 5 characters long"
+			pass1: {
+				required: "Por favor ingresa una contraseña",
+				minlength: "La contraseña debe tener al menos 6 caracteres"
 			},
-			confirm_password: {
-				required: "Please provide a password",
-				minlength: "Your password must be at least 5 characters long",
-				equalTo: "Please enter the same password as above"
+			pass2: {
+				required: "Por favor ingresa una contraseña",
+				minlength: "La contraseña debe tener al menos 6 caracteres",
+				equalTo: "Las contraseñas deben coincidir"
 			},
-			email: "Please enter a valid email address",
-			agree: "Please accept our policy",
-			topic: "Please select at least 2 topics"
-*/
+			agree: "Debes aceptar nuestras politicas",
 				
 		}
 	}); 

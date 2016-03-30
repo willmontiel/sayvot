@@ -5,6 +5,14 @@ class SessionController extends ControllerBase {
         $account = new Account();
         $accountForm = new AccountForm($account);
 	$this->view->accountForm = $accountForm;
+        
+        $user = new User();
+        $userForm = new UserForm($user);
+        $this->view->userForm = $userForm;
+        
+        if ($this->request->isPost()) {
+            
+        }
     }
     
     public function logoutAction() {
