@@ -21,7 +21,7 @@
                 }
             });
             
-            $('#idCountry').select2().on("select2:select", function(e) {
+            $('.country').select2().on("select2:select", function(e) {
                 id = $(this).val();
                 $("#idAccountplan").select2({
                     ajax: {
@@ -76,13 +76,18 @@
          <!--   Big container   -->
     <div class="container">
         <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                {{flashSession.output()}}
+            </div>
+        </div>    
+        <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
            
             <!--      Wizard container        -->   
             <div class="wizard-container"> 
                 
                 <div class="card wizard-card ct-wizard-green" id="wizard">
-                    <form action="" method="">
+                    <form action="{{url('session/signup')}}" method="POST">
                 <!--        You can switch "ct-wizard-orange"  with one of the next bright colors: "ct-wizard-blue", "ct-wizard-green", "ct-wizard-orange", "ct-wizard-red"             -->
                         <div class="wizard-header">
                             <a href="http://creative-tim.com">
@@ -143,7 +148,17 @@
                                       
                                       <div class="form-group">
                                           <label>*País</label>
-                                        {{ userForm.render('idCountry')}}
+                                        {{ userForm.render('country')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Departamento/Provincia/Estado</label>
+                                        {{ userForm.render('state')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Ciudad</label>
+                                        {{ userForm.render('city')}}
                                       </div>
                                       
                                       <div class="form-group">
@@ -169,27 +184,27 @@
                                     <div class="col-md-offset-1 col-md-10">
                                         <div class="form-group">
                                             <label for="simbol">*Nombre de la cuenta, Institución o Compañia</label>
-                                            {{ accountForm.render('name')}}
+                                            {{ accountForm.render('accountName')}}
                                         </div>
 
                                         <div class="form-group">
                                             <label for="simbol">*Dirección de correo eléctronico</label>
-                                            {{ accountForm.render('email')}}
+                                            {{ accountForm.render('accountEmail')}}
                                         </div>
 
                                         <div class="form-group">
                                             <label for="simbol">*Télefono y/o Celular</label>
-                                            {{ accountForm.render('phone')}}
+                                            {{ accountForm.render('accountPhone')}}
                                         </div>
 
                                         <div class="form-group">
                                             <label for="simbol">*Dirección</label>
-                                            {{ accountForm.render('address')}}
+                                            {{ accountForm.render('accountAddress')}}
                                         </div>
 
                                         <div class="form-group">
                                             <label for="name">*País</label>
-                                            {{ accountForm.render('idCountry')}}
+                                            {{ accountForm.render('accountIdCountry')}}
                                         </div>
 
                                         <div class="form-group">
@@ -279,7 +294,7 @@
                         <div class="wizard-footer">
                             <div class="pull-right">
                                 <input type='button' class='btn btn-next btn-success' name='next' value='Siguiente' />
-                                <input type='button' class='btn btn-finish btn-success' name='finish' value='Finalizar' />
+                                <input type='submit' class='btn btn-finish btn-success' name='finish' value='Finalizar' />
                             </div>
                             <div class="pull-left">
                                 <input type='button' class='btn btn-previous btn-default btn-sm' name='previous' value='Atras' />

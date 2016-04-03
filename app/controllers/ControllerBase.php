@@ -90,7 +90,9 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
      */
     protected function saveModel($model, $successMsg) {
         if ($model->save()) {
-            $this->flashSession->success($successMsg);
+            if (!empty($successMsg)) {
+                $this->flashSession->success($successMsg);
+            }
             return true;
         }
 

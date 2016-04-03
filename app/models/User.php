@@ -1,8 +1,9 @@
 <?php
 
+use  Phalcon\Mvc\Model\Validator\Email;
+
 class User extends BaseModel {
     public $idUser;
-    public $idCredential;
     public $idAccount;
     public $agree;
     public $updatedon;
@@ -18,7 +19,7 @@ class User extends BaseModel {
     public $address;
     
     public function initialize() {
-        $this->hasOne("idCredential", "Credential", "idCredential");
+        $this->hasOne("idUser", "Credential", "idUser");
         $this->belongsTo("idAccount", "Account", "idAccount");
     }
     

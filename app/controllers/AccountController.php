@@ -32,7 +32,7 @@ class AccountController extends ControllerBase {
             }
             catch (Exception $ex) {
                 $this->flashSession->error("Ha ocurrido un error, por favor contacta al administrador");
-                $this->logger->log("Exception while creating currency: " . $ex->getMessage());
+                $this->logger->log("Exception while creating account: " . $ex->getMessage());
                 $this->logger->log($ex->getTraceAsString());
             }
         }

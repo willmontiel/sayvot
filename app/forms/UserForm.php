@@ -27,18 +27,28 @@ class UserForm extends Form {
             'id' => 'lastname'
         )));
         
-        $this->add(new Select('idCountry', Country::find(), array(
-            'using' => array('idCountry', 'name'),
-            'class' => 'form-control',
+        $this->add(new Select('country', Country::find(), array(
+            'using' => array('name', 'name'),
+            'class' => 'select2 form-control',
             'required' => 'required',
-            'autofocus' => "autofocus",
-            'id' => 'idCountry'
+        )));
+        
+        $this->add(new Select('city', City::find(), array(
+            'using' => array('name', 'name'),
+            'class' => 'form-control select2',
+            'required' => 'required',
+        )));
+        
+        $this->add(new Select('state', State::find(), array(
+            'using' => array('name', 'name'),
+            'class' => 'form-control select2',
+            'required' => 'required',
         )));
         
         $this->add(new Check('agree', array(
             'value' => 1,
             'id' => 'agree',
-            'class' => 'onoffswitch-checkbox', 
+            'class' => '', 
             'id' => 'agree'
         )));
         

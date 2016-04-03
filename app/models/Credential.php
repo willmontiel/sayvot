@@ -1,7 +1,11 @@
 <?php
 
+use Phalcon\Mvc\Model\Validator\StringLength,
+    Phalcon\Mvc\Model\Validator\Regex;
+
 class Credential extends BaseModel {
     public $idCredential;
+    public $idUser;
     public $updatedon;
     public $createdon;
     public $firstTime;
@@ -9,15 +13,10 @@ class Credential extends BaseModel {
     public $password;
     
     public function initialize() {
-        $this->hasOne("idCredential", "Credential", "idCredential");
+        $this->belongsTo("idUser", "User", "idUser");
     }
     
     public function validation() {
-        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
-            'field' => 'name',
-            "message" => "Debes enviar tu nombre completo"
-        )));
-        
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field" => "password",
             "message" => "No ha ingresado una contraseña, (minimo 8 caracteres)"
@@ -25,7 +24,7 @@ class Credential extends BaseModel {
 
         $this->validate(new StringLength(array(
             "field" => "password",
-            "min" => 8,
+            "min" => 6,
             "message" => "La contraseña es muy corta, debe estar entre 8 y 40 caracteres"
         )));
 

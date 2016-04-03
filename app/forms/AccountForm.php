@@ -7,9 +7,9 @@ use Phalcon\Forms\Form,
 
 class AccountForm extends Form {
     public function initialize() {
-        $this->add(new Select('idCountry', Country::find(), array(
+        $this->add(new Select('accountIdCountry', Country::find(), array(
             'using' => array('idCountry', 'name'),
-            'class' => 'form-control',
+            'class' => 'country form-control',
             'required' => 'required',
             'autofocus' => "autofocus",
             'id' => 'idCountry'
@@ -26,7 +26,7 @@ class AccountForm extends Form {
             
         )));
         
-        $this->add(new Text('name', array(
+        $this->add(new Text('accountName', array(
             'maxlength' => 100,
             'type' => 'text',
             'placeholder' => 'Nombre de la cuenta',
@@ -43,7 +43,7 @@ class AccountForm extends Form {
             'id' => 'nit'
         )));
         
-        $this->add(new Email('email', array(
+        $this->add(new Email('accountEmail', array(
             'maxlength' => 100,
             'type' => 'email',
             'placeholder' => 'Dirección de correo eléctronico',
@@ -52,7 +52,7 @@ class AccountForm extends Form {
             'id' => 'email'
         )));
         
-        $this->add(new Text('phone', array(
+        $this->add(new Text('accountPhone', array(
             'maxlength' => 30,
             'type' => 'text',
             'placeholder' => 'Número de télefono o celular',
@@ -61,7 +61,7 @@ class AccountForm extends Form {
             'id' => 'phone'
         )));
         
-        $this->add(new Text('address', array(
+        $this->add(new Text('accountAddress', array(
             'maxlength' => 100,
             'type' => 'text',
             'placeholder' => 'Dirección',

@@ -11,7 +11,59 @@ class SessionController extends ControllerBase {
         $this->view->userForm = $userForm;
         
         if ($this->request->isPost()) {
-            
+            try {
+                $this->db->begin();
+                
+                $accountForm->bind($this->request->getPost(), $account);
+                $userForm->bind($this->request->getPost(), $user);
+                
+                $pass1 = $userForm->getValue('pass1');
+                $pass2 = $userForm->getValue('pass2');
+                
+                $this->validateEqualsPassword($pass1, $pass2);
+                
+                $account->status = 1;
+                $account->idCountry = $accountForm->getValue('accountIdCountry');
+                $account->name = $accountForm->getValue('accountName');
+                $account->email = $accountForm->getValue('accountEmail');
+                $account->phone = $accountForm->getValue('accountPhone');
+                $account->address = $accountForm->getValue('accountAddress');
+
+                if ($this->saveModel($account, null)) {
+                    
+                    $user->idAccount = $account->idAccount;
+                    $user->status = 1;
+                    $user->country = $userForm->getValue('accountAddress');
+                    if ($this->saveModel($user, null)) {
+                        $credential = new Credential();
+                        $credential->idUser = $user->idUser;
+                        $credential->firstTime = 1;
+                        $credential->username = $this->request->getPost('username');
+                        $credential->password = $this->hash->hash($pass1);
+                        if ($this->saveModel($credential, "Se ha guardado el perfil exitosamente")) {
+                            $this->db->commit();
+                            return $this->response->redirect("session/login");
+                        }
+                    }
+                }
+            } 
+            catch (InvalidArgumentException $ex) {
+                $this->flashSession->error($ex->getMessage());
+                $this->db->rollback();
+            }
+            catch (Exception $ex) {
+                $this->db->rollback();
+                $this->flashSession->error("Ha ocurrido un error, por favor contacta al administrador");
+                $this->logger->log("Exception while creating account: " . $ex->getMessage());
+                $this->logger->log("Exception while creating account: " . $ex->getTrace());
+                $this->logger->log($ex->getTraceAsString());
+            }
+        }
+    }
+    
+    private function validateEqualsPassword($pass1, $pass2) {
+        if ($pass1 != $pass2) {
+            throw new InvalidArgumentException("Las contraseñas no coinciden, por favor valida la información");
         }
     }
     
