@@ -1,7 +1,5 @@
 <?php
 
-use  Phalcon\Mvc\Model\Validator\Email;
-
 class User extends BaseModel {
     public $idUser;
     public $idAccount;
@@ -11,7 +9,6 @@ class User extends BaseModel {
     public $status;
     public $name;
     public $lastname;
-    public $email;
     public $country;
     public $state;
     public $city;
@@ -32,11 +29,6 @@ class User extends BaseModel {
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             'field' => 'lastname',
             "message" => "Debes enviar tus apellidos"
-        )));
-        
-        $this->validate(new Email(array(
-            "field"   => 'email',
-            "message" => "Debes enviar una dirección de correo eléctronica válida"
         )));
         
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(

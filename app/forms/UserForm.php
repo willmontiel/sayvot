@@ -86,15 +86,6 @@ class UserForm extends Form {
             'id' => 'status'
         )));
         
-        $this->add(new Text('username', array(
-            'maxlength' => 100,
-            'type' => 'text',
-            'placeholder' => 'Nombre de usuario',
-            'required' => 'required',
-            'class' => 'form-control',
-            'id' => 'username'
-        )));
-        
         $this->add(new Password('pass1', array(
             'maxlength' => 100,
             'type' => 'text',
@@ -111,6 +102,11 @@ class UserForm extends Form {
             'required' => 'required',
             'class' => 'form-control',
             'id' => 'pass2'
+        )));
+
+        $this->add(new Select('gender', array(
+            "male" => "Masculino",
+            "female" => "Femenino"
         )));
     }
 }

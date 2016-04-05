@@ -1,7 +1,7 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator\StringLength,
-    Phalcon\Mvc\Model\Validator\Regex;
+use Phalcon\Mvc\Model\Validator\Uniqueness,
+    Phalcon\Mvc\Model\Validator\Email;
 
 class Credential extends BaseModel {
     public $idCredential;
@@ -28,23 +28,17 @@ class Credential extends BaseModel {
             "message" => "La contraseña es muy corta, debe estar entre 8 y 40 caracteres"
         )));
 
-        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
-            "field" => "username",
-            "message" => "Por favor ingrese el nombre de usuario, se necesitará para iniciar sesión"
-        )));
-
-        $this->validate(new StringLength(array(
-                "field" => "username",
-                "min" => 4,
-                "message" => "El nombre de usuario es muy corto, debe tener al menos 4 caracteres"
-        )));
-
-        $this->validate(new Regex(array(
-            'field' => 'username',
-            'pattern' => '/^[a-z0-9\._-]{4,30}/',
-            'message' => 'El nombre de usuario no debe tener espacios ni caracteres especiales, tampoco letras mayúsculas y debe tener mínimo 4 y máximo 30 caracteres'
+        $this->validate(new Email(array(
+            "field"   => 'email',
+            "message" => "Debes enviar una dirección de correo eléctronico válida"
         )));
         
+
+        $this->validate(new Uniqueness(array(
+            'field' => 'email',
+            "message" => "Ya existe un perfil con la dirección de correo eléctronico ingresada"
+        )));
+
         return $this->validationHasFailed() != true;
     }
 }

@@ -88,7 +88,6 @@
                 
                 <div class="card wizard-card ct-wizard-green" id="wizard">
                     <form action="{{url('session/signup')}}" method="POST">
-                <!--        You can switch "ct-wizard-orange"  with one of the next bright colors: "ct-wizard-blue", "ct-wizard-green", "ct-wizard-orange", "ct-wizard-red"             -->
                         <div class="wizard-header">
                             <a href="http://creative-tim.com">
                                 <div class="logo-container">
@@ -105,6 +104,7 @@
                     	<ul>
                             <li><a href="#profile" data-toggle="tab">Perfil</a></li>
                             <li><a href="#account" data-toggle="tab">Cuenta</a></li>
+                            <li><a href="#plan" data-toggle="tab">Plan</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane" id="profile">
@@ -179,6 +179,77 @@
                               </div>
                             </div>
                             <div class="tab-pane" id="account">
+                              <div class="row">
+                                  <h4 class="info-text"> Empecemos con la información básica (los campos con * son obligatorios)</h4>
+                                  <div class="col-sm-4 col-sm-offset-1">
+                                     <div class="picture-container">
+                                          <div class="picture">
+                                              <img src="{{url('')}}images/general/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
+                                              <input type="file" id="wizard-picture">
+                                          </div>
+                                          <h6>Choose Picture</h6>
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <label>*Nombre(s)</label>
+                                        {{ userForm.render('name')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Apellido(s)</label>
+                                        {{ userForm.render('lastname')}}
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-10 col-sm-offset-1">
+                                      <div class="form-group">
+                                          <label>*Dirección de correo eléctronico*</label>
+                                        {{ userForm.render('email')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Télefono o Celular</label>
+                                        {{ userForm.render('phone')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Dirección</label>
+                                        {{ userForm.render('address')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*País</label>
+                                        {{ userForm.render('country')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Departamento/Provincia/Estado</label>
+                                        {{ userForm.render('state')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Ciudad</label>
+                                        {{ userForm.render('city')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Nombre de usuario (se usará para iniciar sesión)</label>
+                                        {{ userForm.render('username')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Contraseña</label>
+                                        {{ userForm.render('pass1')}}
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                          <label>*Confirma tu contraseña</label>
+                                        {{ userForm.render('pass2')}}
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="tab-pane" id="plan">
                                 <h4 class="info-text"> Datos de la cuenta </h4>
                                 <div class="row">
                                     <div class="col-md-offset-1 col-md-10">
