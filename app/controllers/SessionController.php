@@ -55,7 +55,6 @@ class SessionController extends ControllerBase {
                 $this->db->rollback();
                 $this->flashSession->error("Ha ocurrido un error, por favor contacta al administrador");
                 $this->logger->log("Exception while creating account: " . $ex->getMessage());
-                $this->logger->log("Exception while creating account: " . $ex->getTrace());
                 $this->logger->log($ex->getTraceAsString());
             }
         }
@@ -94,11 +93,11 @@ class SessionController extends ControllerBase {
                         return $this->response->redirect("");
                     }
                     else {
-                        $this->flashMessage->error("La cuenta ha sido bloqueada, por favor contacte al administrador");
+                        $this->flashSession->error("La cuenta ha sido bloqueada, por favor contacte al administrador");
                     }
             }
             else {
-                $this->flashMessage->error("Usuario o contraseña incorrecta");
+                $this->flashSession->error("Usuario o contraseña incorrecta");
             }
         }
     }

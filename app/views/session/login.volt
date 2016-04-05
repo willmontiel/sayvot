@@ -8,16 +8,12 @@
             <div class="row fill">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     
-                	<div class="container">
-				        <div class="row">
-				            <div class="col-sm-8 col-sm-offset-2">
-				                {{flashSession.output()}}
-				            </div>
-				        </div>    
+                	<div class="container">   
 				        <div class="row">
 				        	<div class="col-sm-8 col-sm-offset-2">
 				        		<div class="wizard-container">
 				        			<div class="panel panel-default">
+                                                                    
 									  	<div class="panel-body">
 										    <form action="{{url('session/login')}}" method="POST">
 				                        		<div class="col-sm-10 col-sm-offset-1">
@@ -29,6 +25,8 @@
 							                               <b>Iniciar</b> Sesión <br>
 							                            </h3>
 				                        			</div>
+                                                                                    
+                                                                                    {{flashSession.output()}}
 				                                  	<div class="form-group">
 				                                      	<label>*Dirección de correo elétronico</label>
 				                                	    <input type="email" class="form-control"required="required" name="email" id="email" />
