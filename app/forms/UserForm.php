@@ -108,5 +108,21 @@ class UserForm extends Form {
             "male" => "Masculino",
             "female" => "Femenino"
         )));
+
+        $this->add(new Text('twitter', array(
+            'maxlength' => 100,
+            'type' => 'text',
+            'placeholder' => 'Link a cuenta de twitter',
+            'class' => 'form-control',
+            'id' => 'twitter'
+        )));
+
+        $this->add(new Text('facebook', array(
+            'maxlength' => 100,
+            'type' => 'text',
+            'placeholder' => 'Link a cuenta de facebook',
+            'class' => 'form-control',
+            'id' => 'facebook'
+        )));
     }
 }

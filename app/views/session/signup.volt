@@ -132,18 +132,8 @@
                                   </div>
                                   <div class="col-sm-10 col-sm-offset-1">
                                       <div class="form-group">
-                                          <label>*Dirección de correo eléctronico*</label>
-                                        {{ userForm.render('email')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Télefono o Celular</label>
-                                        {{ userForm.render('phone')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Dirección</label>
-                                        {{ userForm.render('address')}}
+                                          <label>*Género</label>
+                                        {{ userForm.render('gender', {'class': "select2 form-control", 'id' : "gender"})}}
                                       </div>
                                       
                                       <div class="form-group">
@@ -160,81 +150,27 @@
                                           <label>*Ciudad</label>
                                         {{ userForm.render('city')}}
                                       </div>
-                                      
+
                                       <div class="form-group">
-                                          <label>*Nombre de usuario (se usará para iniciar sesión)</label>
-                                        {{ userForm.render('username')}}
+                                          <label>*Dirección</label>
+                                        {{ userForm.render('address')}}
                                       </div>
-                                      
+
                                       <div class="form-group">
-                                          <label>*Contraseña</label>
-                                        {{ userForm.render('pass1')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Confirma tu contraseña</label>
-                                        {{ userForm.render('pass2')}}
+                                          <label>*Télefono o Celular</label>
+                                        {{ userForm.render('phone')}}
                                       </div>
                                   </div>
                               </div>
                             </div>
                             <div class="tab-pane" id="account">
                               <div class="row">
-                                  <h4 class="info-text"> Empecemos con la información básica (los campos con * son obligatorios)</h4>
-                                  <div class="col-sm-4 col-sm-offset-1">
-                                     <div class="picture-container">
-                                          <div class="picture">
-                                              <img src="{{url('')}}images/general/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
-                                              <input type="file" id="wizard-picture">
-                                          </div>
-                                          <h6>Choose Picture</h6>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group">
-                                          <label>*Nombre(s)</label>
-                                        {{ userForm.render('name')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Apellido(s)</label>
-                                        {{ userForm.render('lastname')}}
-                                      </div>
-                                  </div>
+                                  <h4 class="info-text"> Ahora continuemos con los datos de tu perfil (los campos con * son obligatorios)</h4>
+                                  
                                   <div class="col-sm-10 col-sm-offset-1">
                                       <div class="form-group">
-                                          <label>*Dirección de correo eléctronico*</label>
+                                          <label>*Dirección de correo eléctronico (se usará para iniciar sesión)</label>
                                         {{ userForm.render('email')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Télefono o Celular</label>
-                                        {{ userForm.render('phone')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Dirección</label>
-                                        {{ userForm.render('address')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*País</label>
-                                        {{ userForm.render('country')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Departamento/Provincia/Estado</label>
-                                        {{ userForm.render('state')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Ciudad</label>
-                                        {{ userForm.render('city')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Nombre de usuario (se usará para iniciar sesión)</label>
-                                        {{ userForm.render('username')}}
                                       </div>
                                       
                                       <div class="form-group">
@@ -245,6 +181,16 @@
                                       <div class="form-group">
                                           <label>*Confirma tu contraseña</label>
                                         {{ userForm.render('pass2')}}
+                                      </div>
+
+                                      <div class="form-group">
+                                          <label>Cuenta de Twitter</label>
+                                        {{ userForm.render('twitter')}}
+                                      </div>
+
+                                      <div class="form-group">
+                                          <label>Cuenta de Facebook</label>
+                                        {{ userForm.render('facebook')}}
                                       </div>
                                   </div>
                               </div>
@@ -253,6 +199,11 @@
                                 <h4 class="info-text"> Datos de la cuenta </h4>
                                 <div class="row">
                                     <div class="col-md-offset-1 col-md-10">
+                                        <div class="form-group">
+                                            <label for="idAccounttype">*Tipo de cuenta</label>
+                                            {{ accountForm.render('idAccounttype')}}
+                                        </div>
+                                        
                                         <div class="form-group">
                                             <label for="simbol">*Nombre de la cuenta, Institución o Compañia</label>
                                             {{ accountForm.render('accountName')}}
@@ -283,10 +234,7 @@
                                             {{ accountForm.render('city')}}
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="idAccounttype">*Tipo de cuenta</label>
-                                            {{ accountForm.render('idAccounttype')}}
-                                        </div>
+                                        
                                         
                                         <div id="nit-container" class="form-group" style="display: none;">
                                             <label for="code">NIT</label>

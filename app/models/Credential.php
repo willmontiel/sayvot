@@ -32,7 +32,6 @@ class Credential extends BaseModel {
             "field"   => 'email',
             "message" => "Debes enviar una dirección de correo eléctronico válida"
         )));
-        
 
         $this->validate(new Uniqueness(array(
             'field' => 'email',
