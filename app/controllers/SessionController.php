@@ -21,16 +21,25 @@ class SessionController extends ControllerBase {
                 $pass2 = $userForm->getValue('pass2');
                 
                 $this->validateEqualsPassword($pass1, $pass2);
-                
+                $accounttype = $accountForm->getValue('idAccounttype');
                 $account->status = 1;
+                $account->confirm = 1;
                 $account->idCountry = $accountForm->getValue('accountIdCountry');
-                $account->name = $accountForm->getValue('accountName');
-                $account->email = $accountForm->getValue('accountEmail');
-                $account->phone = $accountForm->getValue('accountPhone');
-                $account->address = $accountForm->getValue('accountAddress');
-
+                
+                if ($accounttype == 3) {
+                    $account->name = $accountForm->getValue('accountName');
+                    $account->email = $accountForm->getValue('accountEmail');
+                    $account->phone = $accountForm->getValue('accountPhone');
+                    $account->address = $accountForm->getValue('accountAddress');
+                }
+                else {
+                    $account->name = $userForm->getValue('email');
+                    $account->email = $userForm->getValue('email');
+                    $account->phone = $userForm->getValue('phone');
+                    $account->address = $userForm->getValue('address');
+                }
+                
                 if ($this->saveModel($account, null)) {
-                    
                     $user->idAccount = $account->idAccount;
                     $user->status = 1;
                     $user->country = $userForm->getValue('accountAddress');
@@ -82,7 +91,7 @@ class SessionController extends ControllerBase {
                 "bind" => array($login)
             ));
 	
-            if ($user && $this->hash->checkHash($password, $credential->password)) {
+            if ($credential && $this->hash->checkHash($password, $credential->password)) {
                     $user = User::findFirstByIdUser($credential->idUser);
                     $account = Account::findFirstByIdAccount($user->idAccount);
 
@@ -135,7 +144,7 @@ class SessionController extends ControllerBase {
                         $link = '<a href="' . $url . '" style="text-decoration: underline;">Click aqui</a>';
                         try {
                             $this->logger->log($link);
-                            $NotificationMail = new NotificationMail();
+                            $NotificationMail = new \Sayvot\Misc\NotificationMail();
                             $NotificationMail->createRecoverpasswordMail($credential->email, $link);
                             $NotificationMail->sendMail();
                         }
@@ -170,108 +179,106 @@ class SessionController extends ControllerBase {
         }
     }
 	
-	public function setnewpasswordAction() {
-		if ($this->request->isPost()) {
-			$uniq = $this->request->getPost("uniq");
-	
-			$url = Tmprecoverpassword::findFirst(array(
-				'conditions' => 'idTmprecoverpassword = ?1',
-				'bind' => array(1 => $uniq)
-			));
-			
-			$time = strtotime("-30 minutes");
-			
+    public function setnewpasswordAction() {
+        if ($this->request->isPost()) {
+            $uniq = $this->request->getPost("uniq");
+
+            $url = Tmprecoverpassword::findFirst(array(
+                    'conditions' => 'idTmprecoverpassword = ?1',
+                    'bind' => array(1 => $uniq)
+            ));
+
+            $time = strtotime("-30 minutes");
+
             if (!$url && $url->date <= $time) {
                 $this->flashSession->success('El tiempo para recuperar su contraseña, ha caducado, por favor haga el proceso desde cero');
                 return $this->response->redirect('session/login');
             }
 
             $password1 = $this->request->getPost("password1");
-            $password1 = $this->request->getPost("password2");
+            $password2 = $this->request->getPost("password2");
 
-            if (empty($pass)||empty($pass2)){
+            if (empty($password1)||empty($password2)){
                 $this->flashSession->error("No has enviado las contraseñas");
                 return $this->response->redirect('session/resetpassword/' . $uniq);
             }
 
-			if (strlen($pass) < 8 || strlen($pass) > 40) {
+            if (strlen($password1) < 8 || strlen($password2) > 40) {
                 $this->flashSession->error("La contraseña es muy corta o muy larga, esta debe tener mínimo 8 y máximo 40 caracteres, por favor verifique la información");
                 return $this->response->redirect('session/resetpassword/' . $uniq);
             }
-				
-            if ($pass !== $pass2) {
+
+            if ($password1 !== $password2) {
                 $this->flashSession->error("Las contraseñas no coinciden, por favor verifique la información");
                 return $this->response->redirect('session/resetpassword/' . $uniq);
             }
-				
-    		$idUser = $this->session->get('idUser');
-					
-			$credential = Credential::findFirst(array(
-				'conditions' => 'idUser = ?1',
-				'bind' => array(1 => $idUser)
-			));
+
+            $idUser = $this->session->get('idUser');
+
+            $credential = Credential::findFirst(array(
+                'conditions' => 'idUser = ?1',
+                'bind' => array(1 => $idUser)
+            ));
 
             if (!$credential) {
                 $this->flashSession->error("No existe el usuario, por favor valida la información");
                 return $this->response->redirect('session/login');
             }
-						
-			$credential->password = $this->hash->hash($pass);
 
-			if (!$credential->save()) {
-				$this->flashSession->notice('Ha ocurrido un error, contacte con el administrador');
-				foreach ($user->getMessages() as $msg) {
-					$this->logger->log('Error while recovering user password' . $msg);
-				}
-			}
+            $credential->password = $this->hash->hash($password1);
+
+            if (!$credential->save()) {
+                $this->flashSession->notice('Ha ocurrido un error, contacte con el administrador');
+                foreach ($user->getMessages() as $msg) {
+                    $this->logger->log('Error while recovering user password' . $msg);
+                }
+            }
 
             $this->flashSession->notice('Se ha actualizado el usuario exitosamente');
             return $this->response->redirect('session/login');
-		}
-	}
+        }
+    }
 	
-	public function loginlikethisuserAction($idUser)
-	{
-		$user = User::findFirst(array(
-			'conditions' => 'idUser = ?1',
-			'bind' => array(1 => $idUser)
-		));
+    public function loginlikethisuserAction($idUser) {
+            $user = User::findFirst(array(
+                    'conditions' => 'idUser = ?1',
+                    'bind' => array(1 => $idUser)
+            ));
 
-		if (!$user) {
-			$this->flashSession->error("No se ha podido ingresar como el usuario, porque este no existe");
-			return $this->response->redirect('account/index');
-		}
+            if (!$user) {
+                    $this->flashSession->error("No se ha podido ingresar como el usuario, porque este no existe");
+                    return $this->response->redirect('account/index');
+            }
 
-		$this->session->set('userid', $user->idUser);
-		$this->session->set('authenticated', true);
+            $this->session->set('userid', $user->idUser);
+            $this->session->set('authenticated', true);
 
-		$this->user = $user;
-		$this->user->userrole = 'ROLE_SUDO';
-		
-		$uefective = $this->session->get('userefective');
-		$this->traceSuccess("Login by sudo: {$uefective->username} / {$uefective->idUser}, in account {$this->user->account->idAccount} with user {$this->user->username} / {$this->user->idUser}");
-		return $this->response->redirect("");
-	}
-	
-	public function logoutfromthisaccountAction()
-	{
-		$uefective = $this->session->get('userefective');
-		$olduser = $this->user;
-		$oldAccount = $this->user->account;
-		
-		if (isset($uefective)) {
-			$this->session->set('userid', $uefective->idUser);
-			$this->session->set('authenticated', true);
+            $this->user = $user;
+            $this->user->userrole = 'ROLE_SUDO';
 
-			$this->user = $uefective;
+            $uefective = $this->session->get('userefective');
+            $this->traceSuccess("Login by sudo: {$uefective->username} / {$uefective->idUser}, in account {$this->user->account->idAccount} with user {$this->user->username} / {$this->user->idUser}");
+            return $this->response->redirect("");
+    }
 
-			$this->session->remove('userefective');
-			$this->traceSuccess("Logout by sudo: {$uefective->username} / {$uefective->idUser}, in account {$oldAccount->idAccount} with user {$olduser->username} / {$olduser->idUser}");
-			return $this->response->redirect("");
-		}
-		else {
-			return $this->response->redirect("error/unauthorized");
-		}
-		
-	}
+    public function logoutfromthisaccountAction(){
+            $uefective = $this->session->get('userefective');
+            $olduser = $this->user;
+            $oldAccount = $this->user->account;
+
+            if (isset($uefective)) {
+                    $this->session->set('userid', $uefective->idUser);
+                    $this->session->set('authenticated', true);
+
+                    $this->user = $uefective;
+
+                    $this->session->remove('userefective');
+                    $this->traceSuccess("Logout by sudo: {$uefective->username} / {$uefective->idUser}, in account {$oldAccount->idAccount} with user {$olduser->username} / {$olduser->idUser}");
+                    return $this->response->redirect("");
+            }
+            else {
+                    return $this->response->redirect("error/unauthorized");
+            }
+
+    }
 }

@@ -17,6 +17,7 @@ class Account extends BaseModel {
     public $nit;
     public $city;
     public $status;
+    public $confirm;
     
     public function initialize() {
         $this->belongsTo("idCountry", "Country", "idCountry");

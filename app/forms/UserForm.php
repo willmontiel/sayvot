@@ -124,5 +124,13 @@ class UserForm extends Form {
             'class' => 'form-control',
             'id' => 'facebook'
         )));
+        
+        $this->add(new Text('institute', array(
+            'maxlength' => 100,
+            'type' => 'text',
+            'placeholder' => 'Colegio/Instituto o Universidad',
+            'class' => 'form-control',
+            'id' => 'institute'
+        )));
     }
 }

@@ -14,6 +14,9 @@ class User extends BaseModel {
     public $city;
     public $phone;
     public $address;
+    public $twitter;
+    public $facebook;
+    public $institute;
     
     public function initialize() {
         $this->hasOne("idUser", "Credential", "idUser");

@@ -15,9 +15,24 @@
            
             $('#idAccounttype').select2().on("select2:select", function(e) {
                 $('#nit-container').hide('fast');
+                $('#institute-container').hide('fast');
+                $('#accountName-container').hide('fast');
+                $('#accountEmail-container').hide('fast');
+                $('#accountPhone-container').hide('fast');
+                $('#accountAddress-container').hide('fast');
+                $('#city-container').hide('fast');
+                
                 var type = $(this).val();
+                if (type == 1 || type == 2) {
+                    $('#institute-container').show('fast');
+                }
                 if (type == 3) {
                     $('#nit-container').show('fast');
+                    $('#accountName-container').show('fast');
+                    $('#accountEmail-container').show('fast');
+                    $('#accountPhone-container').show('fast');
+                    $('#accountAddress-container').show('fast');
+                    $('#city-container').show('fast');
                 }
             });
             
@@ -73,38 +88,31 @@
     </script>   
 {% endblock %}
 {% block content %}
-  <div class="image-container set-full-height" style="background-image: url('{{url('')}}images/backgrounds/city.jpg')">
-      <div class="container-fluid fill">
-          <div class="row fill">
-              <div class="col-sm-12 col-md-12 col-lg-12">
-                  
-
-                <div class="container">
-                  <div class="row">
-                      <div class="col-sm-8 col-sm-offset-2">
-                          {{flashSession.output()}}
-                      </div>
-                  </div>    
-                  <div class="row">
-                  <div class="col-sm-8 col-sm-offset-2">
-                     
-                      <!--      Wizard container        -->   
+<div class="image-container set-full-height" style="background-image: url('{{url('')}}images/backgrounds/city.jpg')">
+    <div class="container-fluid fill">
+        <div class="row fill">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="container">  
+                    <div class="row">
+                  <div class="col-sm-8 col-sm-offset-2"> 
                       <div class="wizard-container"> 
-                          
                           <div class="card wizard-card ct-wizard-green" id="wizard">
                               <form action="{{url('session/signup')}}" method="POST">
                                   <div class="wizard-header">
-                                      <a href="#">
-                                          <div class="logo-container">
-                                             <div class="logo">
-                                                 <img src="{{url('')}}images/sayvot-logo.png" width="100">
-                                             </div>
-                                         </div>
-                                      </a>
-                                      <h3>
-                                         <b>Registra</b> tu perfil <br>
-                                         <small>Y comienza a encuestar a tu público al instante</small>
-                                      </h3>
+                                        <a href="#">
+                                            <div class="logo-container">
+                                               <div class="logo">
+                                                   <img src="{{url('')}}images/sayvot-logo.png" width="100">
+                                               </div>
+                                           </div>
+                                        </a>
+                                        <h3>
+                                           <b>Registra</b> tu perfil <br>
+                                           <small>Y comienza a encuestar a tu público al instante</small>
+                                        </h3>
+                                             
+                                        <br>
+                                        {{flashSession.output()}}
                                 </div>
                                 <ul>
                                       <li><a href="#profile" data-toggle="tab">Perfil</a></li>
@@ -209,22 +217,32 @@
                                                       {{ accountForm.render('idAccounttype')}}
                                                   </div>
                                                   
-                                                  <div class="form-group">
-                                                      <label for="simbol">*Nombre de la cuenta, Institución o Compañia</label>
+                                                  <div id="institute-container" class="form-group" style="display: none;">
+                                                      <label for="institute">Colegio/Instituto o Universidad</label>
+                                                      {{ userForm.render('institute')}}
+                                                  </div>
+                                                  
+                                                  <div id="accountName-container" class="form-group" style="display: none;">
+                                                      <label for="simbol">*Nombre de la cuenta o Compañia</label>
                                                       {{ accountForm.render('accountName')}}
                                                   </div>
+                                                  
+                                                  <div id="nit-container" class="form-group" style="display: none;">
+                                                      <label for="code">NIT</label>
+                                                      {{ accountForm.render('nit')}}
+                                                  </div>
 
-                                                  <div class="form-group">
+                                                  <div id="accountEmail-container" class="form-group" style="display: none;">
                                                       <label for="simbol">*Dirección de correo eléctronico</label>
                                                       {{ accountForm.render('accountEmail')}}
                                                   </div>
 
-                                                  <div class="form-group">
+                                                  <div id="accountPhone-container" class="form-group" style="display: none;">
                                                       <label for="simbol">*Télefono y/o Celular</label>
                                                       {{ accountForm.render('accountPhone')}}
                                                   </div>
 
-                                                  <div class="form-group">
+                                                  <div id="accountAddress-container" class="form-group" style="display: none;">
                                                       <label for="simbol">*Dirección</label>
                                                       {{ accountForm.render('accountAddress')}}
                                                   </div>
@@ -234,16 +252,9 @@
                                                       {{ accountForm.render('accountIdCountry')}}
                                                   </div>
 
-                                                  <div class="form-group">
+                                                  <div id="city-container" class="form-group" style="display: none;">
                                                       <label for="name">*Ciudad</label>
                                                       {{ accountForm.render('city')}}
-                                                  </div>
-
-                                                  
-                                                  
-                                                  <div id="nit-container" class="form-group" style="display: none;">
-                                                      <label for="code">NIT</label>
-                                                      {{ accountForm.render('nit')}}
                                                   </div>
 
                                                   <div class="form-group" id="accountplan-container" >
