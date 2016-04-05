@@ -75,15 +75,16 @@ class SessionController extends ControllerBase {
 	
     public function loginAction() {
         if ($this->request->isPost()) {
-            $login = $this->request->getPost("username");
-            $password = $this->request->getPost("pass");
+            $login = $this->request->getPost("email");
+            $password = $this->request->getPost("password");
 
-            $user = User::findFirst(array(
-                "username = ?0",
+            $credential = Credential::findFirst(array(
+                "email = ?0",
                 "bind" => array($login)
             ));
 	
-            if ($user && $this->hash->checkHash($password, $user->password)) {
+            if ($user && $this->hash->checkHash($password, $credential->password)) {
+                    $user = User::findFirstByIdUser($credential->idUser);
                     $account = Account::findFirstByIdAccount($user->idAccount);
 
                     if ($account && $account->status == 1) {
@@ -102,63 +103,60 @@ class SessionController extends ControllerBase {
         }
     }
 	
-    public function recoverpassAction() {
+    public function recoverpasswordAction() {
         if ($this->request->isPost()) {
             $email = $this->request->getPost("email");
-            $user = User::findFirst(array(
+            $credential = Credential::findFirst(array(
                 'conditions' => 'email = ?1',
                 'bind' => array(1 => $email)
             ));
 
-            if ($user) {
+            if ($credential) {
+                $user = User::findFirstByIdUser($credential->idUser);
+
                 $cod = uniqid();
                 $urlManager = $urlManager = Phalcon\DI::getDefault()->get('urlManager');
                 $url = $urlManager->getBaseUri(true);
                 $url .= 'session/reset/' . $cod;
 
-                    $recoverObj = new Tmprecoverpass();
-                    $recoverObj->idTmpRecoverPass = $cod;
-                    $recoverObj->idUser = $user->idUser;
-                    $recoverObj->url = $url;
-                    $recoverObj->date = time();
+                    $tmprecoverpassword = new Tmprecoverpassword();
+                    $tmprecoverpassword->idTmprecoverpassword = $cod;
+                    $tmprecoverpassword->idUser = $user->idUser;
+                    $tmprecoverpassword->url = $url;
+                    $tmprecoverpassword->date = time();
 
-                    if (!$recoverObj->save()) {
-                            $this->logger->log('Error while saving tmpurl');
-                            foreach ($recoverObj->getMessages() as $msg) {
-                                    $this->logger->log('Msg: ' . $msg);
-                            }
-                            $this->logger->log("user: {$user->idUser}/{$user->username}");
-                            $this->traceFail("Recover pass failed user with email '{$email}' error 500");
-                            $this->flashSession->error('Ha ocurrido un error contacte al administrador');
+                    if (!$tmprecoverpassword->save()) {
+                        foreach ($tmprecoverpassword->getMessages() as $msg) {
+                            $this->logger->log('Msg: ' . $msg);
+                        }
+
+                        $this->flashSession->error('Ha ocurrido un error contacte al administrador');
                     }
                     else {
-                            $link = '<a href="' . $url . '" style="text-decoration: underline;">Click aqui</a>';
-                            try {
-                                    $this->logger->log($link);
-                                    $message = new AdministrativeMessages();
-                                    $message->createRecoverpassMessage($user->email, $link);
-                                    $message->sendMessage();
-                            }
-                            catch (Exception $e) {
-                                    $this->logger->log('Exception: ' . $e->getMessage());
-                                    $this->logger->log("user: {$user->idUser}/{$user->username}");
-                                    $this->traceFail("Recover pass failed user with email '{$email}' error 500");
-                                    $this->flashSession->error('Ha ocurrido un error contacte al administrador');
-                            }
-                            $this->traceSuccess("Send email for recover pass user: {$user->idUser}/{$user->username}");
+                        $link = '<a href="' . $url . '" style="text-decoration: underline;">Click aqui</a>';
+                        try {
+                            $this->logger->log($link);
+                            $NotificationMail = new NotificationMail();
+                            $NotificationMail->createRecoverpasswordMail($credential->email, $link);
+                            $NotificationMail->sendMail();
+                        }
+                        catch (Exception $e) {
+                            $this->logger->log('Exception: ' . $e->getMessage());
+                            
+                            $this->flashSession->error('Ha ocurrido un error contacte al administrador');
+                        }
                     }
             }
-            else {
-                    $this->traceFail("User with email '{$email}'  do not exists");
-            }
+
             $this->flashSession->success('Se ha enviado un correo electronico con instrucciones para recuperar la contraseña');
+
             return $this->response->redirect('session/login');
         }
     }
 	
-    public function resetAction($unique) {
-        $url = Tmprecoverpass::findFirst(array(
-            'conditions' => 'idTmpRecoverPass = ?1',
+    public function resetpasswordAction($unique) {
+        $url = Tmprecoverpassword::findFirst(array(
+            'conditions' => 'idTmprecoverpassword = ?1',
             'bind' => array(1 => $unique)
         ));
 
@@ -169,90 +167,67 @@ class SessionController extends ControllerBase {
             $this->view->setVar('uniq', $unique);
         }
         else {
-            $this->traceFail("Reset pass failed because the link is invalid, do not exists or is expired id: {$unique}");
             return $this->response->redirect('error/link');
         }
     }
 	
-	public function setnewpassAction()
-	{
+	public function setnewpasswordAction() {
 		if ($this->request->isPost()) {
-		
 			$uniq = $this->request->getPost("uniq");
 	
-			$url = Tmprecoverpass::findFirst(array(
-				'conditions' => 'idTmpRecoverPass = ?1',
+			$url = Tmprecoverpassword::findFirst(array(
+				'conditions' => 'idTmprecoverpassword = ?1',
 				'bind' => array(1 => $uniq)
 			));
 			
 			$time = strtotime("-30 minutes");
 			
-			if ($url && $url->date >= $time) {
-				$pass = $this->request->getPost("pass");
-				$pass2 = $this->request->getPost("pass2");
+            if (!$url && $url->date <= $time) {
+                $this->flashSession->success('El tiempo para recuperar su contraseña, ha caducado, por favor haga el proceso desde cero');
+                return $this->response->redirect('session/login');
+            }
 
-				if (empty($pass)||empty($pass2)){
-					$this->flashSession->error("Ha enviado campos vacíos, por favor verifique la información");
-					$this->dispatcher->forward(array(
-						"controller" => "session",
-						"action" => "reset",
-						"params" => array($uniq)
-					));
-				}
-				else if (strlen($pass) < 8 || strlen($pass) > 40) {
-					$this->flashSession->error("La contraseña es muy corta o muy larga, esta debe tener mínimo 8 y máximo 40 caracteres, por favor verifique la información");
-					$this->dispatcher->forward(array(
-						"controller" => "session",
-						"action" => "reset",
-						"params" => array($uniq)
-					));
-				}	
-				else if ($pass !== $pass2) {
-					$this->flashSession->error("Las contraseñas no coinciden, por favor verifique la información");
-					$this->dispatcher->forward(array(
-						"controller" => "session",
-						"action" => "reset",
-						"params" => array($uniq)
-					));
-				}
-				else {
-					$idUser = $this->session->get('idUser');
-					
-					$user = User::findFirst(array(
-						'conditions' => 'idUser = ?1',
-						'bind' => array(1 => $idUser)
-					));
-					
-					if ($user) {
-						$user->password = $this->security2->hash($pass);
+            $password1 = $this->request->getPost("password1");
+            $password1 = $this->request->getPost("password2");
 
-						if (!$user->save()) {
-							$this->flashSession->notice('Ha ocurrido un error, contacte con el administrador');
-							foreach ($user->getMessages() as $msg) {
-								$this->logger->log('Error while recovering user password' . $msg);
-								$this->logger->log("User {$user->idUser}/{$user->username}");
-								$this->traceFail("Reset pass failed error 500");
-								$this->flashSession->error('Ha ocurrido un error contacte al administrador');
-							}
-						}
-						else {
-							$idUser = $this->session->remove('idUser');
-							$url->delete();
-							$this->flashSession->notice('Se ha actualizado el usuario exitosamente');
-							$this->traceSuccess("Recover and reset pass user: {$user->idUser}/{$user->username}");
-							return $this->response->redirect('index');
-						}
-					}
-					else {
-						$this->traceFail("Reset pass failed because user do not exists");
-						return $this->response->redirect('error/link');
-					}
+            if (empty($pass)||empty($pass2)){
+                $this->flashSession->error("No has enviado las contraseñas");
+                return $this->response->redirect('session/resetpassword/' . $uniq);
+            }
+
+			if (strlen($pass) < 8 || strlen($pass) > 40) {
+                $this->flashSession->error("La contraseña es muy corta o muy larga, esta debe tener mínimo 8 y máximo 40 caracteres, por favor verifique la información");
+                return $this->response->redirect('session/resetpassword/' . $uniq);
+            }
+				
+            if ($pass !== $pass2) {
+                $this->flashSession->error("Las contraseñas no coinciden, por favor verifique la información");
+                return $this->response->redirect('session/resetpassword/' . $uniq);
+            }
+				
+    		$idUser = $this->session->get('idUser');
+					
+			$credential = Credential::findFirst(array(
+				'conditions' => 'idUser = ?1',
+				'bind' => array(1 => $idUser)
+			));
+
+            if (!$credential) {
+                $this->flashSession->error("No existe el usuario, por favor valida la información");
+                return $this->response->redirect('session/login');
+            }
+						
+			$credential->password = $this->hash->hash($pass);
+
+			if (!$credential->save()) {
+				$this->flashSession->notice('Ha ocurrido un error, contacte con el administrador');
+				foreach ($user->getMessages() as $msg) {
+					$this->logger->log('Error while recovering user password' . $msg);
 				}
 			}
-			else {
-				$this->traceFail("Reset pass failed because the link is invalid, do not exists or is expired id: {$uniq}");
-				return $this->response->redirect('error/link');
-			}
+
+            $this->flashSession->notice('Se ha actualizado el usuario exitosamente');
+            return $this->response->redirect('session/login');
 		}
 	}
 	

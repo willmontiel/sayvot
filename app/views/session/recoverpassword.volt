@@ -26,7 +26,7 @@
 					                                       <img src="{{url('')}}images/sayvot-logo.png" width="100">
 							                            </a>
 							                            <h3>
-							                               <b>Iniciar</b> Sesión <br>
+							                               <b>Recuperar</b> Contraseña <br>
 							                            </h3>
 				                        			</div>
 				                                  	<div class="form-group">
@@ -34,13 +34,8 @@
 				                                	    <input type="email" class="form-control"required="required" name="email" id="email" />
 				                    			  	</div>
 
-				                    			  	<div class="form-group">
-				                                      	<label>*Contraseña</label>
-				                                	    <input type="password" class="form-control"required="required" name="password" id="password" />
-				                    			  	</div>
-
 				                    			  	<div class="form-group text-right">
-				                                	    <input type="submit" class="btn btn-small btn-success" value="Iniciar Sesión" />
+				                                	    <input type="submit" class="btn btn-small btn-success" value="Recuperar Contraseña" />
 				                    			  	</div>
 
 				                    			  	<div class="form-group text-right">

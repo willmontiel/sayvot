@@ -73,258 +73,287 @@
     </script>   
 {% endblock %}
 {% block content %}
-         <!--   Big container   -->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                {{flashSession.output()}}
-            </div>
-        </div>    
-        <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-           
-            <!--      Wizard container        -->   
-            <div class="wizard-container"> 
-                
-                <div class="card wizard-card ct-wizard-green" id="wizard">
-                    <form action="{{url('session/signup')}}" method="POST">
-                        <div class="wizard-header">
-                            <a href="http://creative-tim.com">
-                                <div class="logo-container">
-                                   <div class="logo">
-                                       <img src="{{url('')}}images/sayvot-logo.png" width="100">
-                                   </div>
-                               </div>
-                            </a>
-                            <h3>
-                               <b>Registra</b> tu perfil <br>
-                               <small>Y comienza a encuestar a tu público al instante</small>
-                            </h3>
-                    	</div>
-                    	<ul>
-                            <li><a href="#profile" data-toggle="tab">Perfil</a></li>
-                            <li><a href="#account" data-toggle="tab">Cuenta</a></li>
-                            <li><a href="#plan" data-toggle="tab">Plan</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane" id="profile">
-                              <div class="row">
-                                  <h4 class="info-text"> Empecemos con la información básica (los campos con * son obligatorios)</h4>
-                                  <div class="col-sm-4 col-sm-offset-1">
-                                     <div class="picture-container">
-                                          <div class="picture">
-                                              <img src="{{url('')}}images/general/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
-                                              <input type="file" id="wizard-picture">
-                                          </div>
-                                          <h6>Choose Picture</h6>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group">
-                                          <label>*Nombre(s)</label>
-                                        {{ userForm.render('name')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Apellido(s)</label>
-                                        {{ userForm.render('lastname')}}
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-10 col-sm-offset-1">
-                                      <div class="form-group">
-                                          <label>*Género</label>
-                                        {{ userForm.render('gender', {'class': "select2 form-control", 'id' : "gender"})}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*País</label>
-                                        {{ userForm.render('country')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Departamento/Provincia/Estado</label>
-                                        {{ userForm.render('state')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Ciudad</label>
-                                        {{ userForm.render('city')}}
-                                      </div>
+  <div class="image-container set-full-height" style="background-image: url('{{url('')}}images/backgrounds/city.jpg')">
+      <div class="container-fluid fill">
+          <div class="row fill">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                  
 
-                                      <div class="form-group">
-                                          <label>*Dirección</label>
-                                        {{ userForm.render('address')}}
-                                      </div>
-
-                                      <div class="form-group">
-                                          <label>*Télefono o Celular</label>
-                                        {{ userForm.render('phone')}}
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-                            <div class="tab-pane" id="account">
-                              <div class="row">
-                                  <h4 class="info-text"> Ahora continuemos con los datos de tu perfil (los campos con * son obligatorios)</h4>
-                                  
-                                  <div class="col-sm-10 col-sm-offset-1">
-                                      <div class="form-group">
-                                          <label>*Dirección de correo eléctronico (se usará para iniciar sesión)</label>
-                                        {{ userForm.render('email')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Contraseña</label>
-                                        {{ userForm.render('pass1')}}
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label>*Confirma tu contraseña</label>
-                                        {{ userForm.render('pass2')}}
-                                      </div>
-
-                                      <div class="form-group">
-                                          <label>Cuenta de Twitter</label>
-                                        {{ userForm.render('twitter')}}
-                                      </div>
-
-                                      <div class="form-group">
-                                          <label>Cuenta de Facebook</label>
-                                        {{ userForm.render('facebook')}}
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-                            <div class="tab-pane" id="plan">
-                                <h4 class="info-text"> Datos de la cuenta </h4>
-                                <div class="row">
-                                    <div class="col-md-offset-1 col-md-10">
-                                        <div class="form-group">
-                                            <label for="idAccounttype">*Tipo de cuenta</label>
-                                            {{ accountForm.render('idAccounttype')}}
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label for="simbol">*Nombre de la cuenta, Institución o Compañia</label>
-                                            {{ accountForm.render('accountName')}}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="simbol">*Dirección de correo eléctronico</label>
-                                            {{ accountForm.render('accountEmail')}}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="simbol">*Télefono y/o Celular</label>
-                                            {{ accountForm.render('accountPhone')}}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="simbol">*Dirección</label>
-                                            {{ accountForm.render('accountAddress')}}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="name">*País</label>
-                                            {{ accountForm.render('accountIdCountry')}}
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="name">*Ciudad</label>
-                                            {{ accountForm.render('city')}}
-                                        </div>
-
-                                        
-                                        
-                                        <div id="nit-container" class="form-group" style="display: none;">
-                                            <label for="code">NIT</label>
-                                            {{ accountForm.render('nit')}}
-                                        </div>
-
-                                        <div class="form-group" id="accountplan-container" >
-                                            <label for="idAccountplan">*Plan</label>
-                                            {{ accountForm.render('idAccountplan', {'id': "idAccountplan", 'class': "form-control", 'required': "required", 'name': "idAccountplan"})}}            
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="text-center" id="loader" style="display: none;">
-                                                <img src="{{url('')}}images/loaders/pacman.gif" width="40">
-                                            </div>
-
-                                            <div class="" id="accountplan-data-container" style="display: none;">
-                                                <table class="table table-responsive">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>    
-                                                                <span id="ap-name" style="font-weight: 800; font-size: 1.2em;"></span> <br>
-                                                                <span id="ap-price"></span> <br>
-                                                                <span id="ap-current"></span>
-                                                            </td>
-                                                            <td>
-                                                                <ul>
-                                                                    <li>
-                                                                        Encuestas: <span id="ap-surveyQuantity"></span>
-                                                                    </li>
-                                                                    <li>
-                                                                        Preguntas: <span id="ap-questionQuantity"></span>
-                                                                    </li>
-                                                                    <li>
-                                                                        Usuarios: <span id="ap-userQuantity"></span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <span id="ap-advertising" style="font-weight: 300;">
-                                                                            Publicidad en app
-                                                                        </span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <span id="ap-sendSMSAuto" style="font-weight: 300;">
-                                                                            Envío de SMS Automáticos
-                                                                        </span>
-                                                                    </li>
-                                                                    <li>
-                                                                        Sitios a evaluar: <span id="ap-sitesQuantity"></span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <span id="ap-sendSMS" style="font-weight: 300;">
-                                                                            Envío de SMS
-                                                                        </span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <span id="ap-exportContact" style="font-weight: 300;">
-                                                                            Exportación de contactos
-                                                                        </span>
-                                                                    </li>
-                                                                </ul>        
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table> 
-                                            </div>
-                                        </div>
-                                            
-                                        <div class="form-group">
-                                            <label>*Estoy de acuerdo con las politicas</label>
-                                            {{ userForm.render('agree')}}
-                                        </div>
-                                    </div>
+                <div class="container">
+                  <div class="row">
+                      <div class="col-sm-8 col-sm-offset-2">
+                          {{flashSession.output()}}
+                      </div>
+                  </div>    
+                  <div class="row">
+                  <div class="col-sm-8 col-sm-offset-2">
+                     
+                      <!--      Wizard container        -->   
+                      <div class="wizard-container"> 
+                          
+                          <div class="card wizard-card ct-wizard-green" id="wizard">
+                              <form action="{{url('session/signup')}}" method="POST">
+                                  <div class="wizard-header">
+                                      <a href="#">
+                                          <div class="logo-container">
+                                             <div class="logo">
+                                                 <img src="{{url('')}}images/sayvot-logo.png" width="100">
+                                             </div>
+                                         </div>
+                                      </a>
+                                      <h3>
+                                         <b>Registra</b> tu perfil <br>
+                                         <small>Y comienza a encuestar a tu público al instante</small>
+                                      </h3>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="wizard-footer">
-                            <div class="pull-right">
-                                <input type='button' class='btn btn-next btn-success' name='next' value='Siguiente' />
-                                <input type='submit' class='btn btn-finish btn-success' name='finish' value='Finalizar' />
-                            </div>
-                            <div class="pull-left">
-                                <input type='button' class='btn btn-previous btn-default btn-sm' name='previous' value='Atras' />
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>	
-                    </form>
-                </div>
-        
-            </div> <!-- wizard container -->
-        </div>
-        </div><!-- end row -->
-    </div> <!--  big container -->    
+                                <ul>
+                                      <li><a href="#profile" data-toggle="tab">Perfil</a></li>
+                                      <li><a href="#account" data-toggle="tab">Cuenta</a></li>
+                                      <li><a href="#plan" data-toggle="tab">Plan</a></li>
+                                  </ul>
+                                  <div class="tab-content">
+                                      <div class="tab-pane" id="profile">
+                                        <div class="row">
+                                            <h4 class="info-text"> Empecemos con la información básica (los campos con * son obligatorios)</h4>
+                                            <div class="col-sm-4 col-sm-offset-1">
+                                               <div class="picture-container">
+                                                    <div class="picture">
+                                                        <img src="{{url('')}}images/general/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
+                                                        <input type="file" id="wizard-picture">
+                                                    </div>
+                                                    <h6>Choose Picture</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>*Nombre(s)</label>
+                                                  {{ userForm.render('name')}}
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label>*Apellido(s)</label>
+                                                  {{ userForm.render('lastname')}}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-10 col-sm-offset-1">
+                                                <div class="form-group">
+                                                    <label>*Género</label>
+                                                  {{ userForm.render('gender', {'class': "select2 form-control", 'id' : "gender"})}}
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label>*País</label>
+                                                  {{ userForm.render('country')}}
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label>*Departamento/Provincia/Estado</label>
+                                                  {{ userForm.render('state')}}
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label>*Ciudad</label>
+                                                  {{ userForm.render('city')}}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>*Dirección</label>
+                                                  {{ userForm.render('address')}}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>*Télefono o Celular</label>
+                                                  {{ userForm.render('phone')}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                      <div class="tab-pane" id="account">
+                                        <div class="row">
+                                            <h4 class="info-text"> Ahora continuemos con los datos de tu perfil (los campos con * son obligatorios)</h4>
+                                            
+                                            <div class="col-sm-10 col-sm-offset-1">
+                                                <div class="form-group">
+                                                    <label>*Dirección de correo eléctronico (se usará para iniciar sesión)</label>
+                                                  {{ userForm.render('email')}}
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label>*Contraseña</label>
+                                                  {{ userForm.render('pass1')}}
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label>*Confirma tu contraseña</label>
+                                                  {{ userForm.render('pass2')}}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Cuenta de Twitter</label>
+                                                  {{ userForm.render('twitter')}}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Cuenta de Facebook</label>
+                                                  {{ userForm.render('facebook')}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                      <div class="tab-pane" id="plan">
+                                          <h4 class="info-text"> Datos de la cuenta </h4>
+                                          <div class="row">
+                                              <div class="col-md-offset-1 col-md-10">
+                                                  <div class="form-group">
+                                                      <label for="idAccounttype">*Tipo de cuenta</label>
+                                                      {{ accountForm.render('idAccounttype')}}
+                                                  </div>
+                                                  
+                                                  <div class="form-group">
+                                                      <label for="simbol">*Nombre de la cuenta, Institución o Compañia</label>
+                                                      {{ accountForm.render('accountName')}}
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                      <label for="simbol">*Dirección de correo eléctronico</label>
+                                                      {{ accountForm.render('accountEmail')}}
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                      <label for="simbol">*Télefono y/o Celular</label>
+                                                      {{ accountForm.render('accountPhone')}}
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                      <label for="simbol">*Dirección</label>
+                                                      {{ accountForm.render('accountAddress')}}
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                      <label for="name">*País</label>
+                                                      {{ accountForm.render('accountIdCountry')}}
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                      <label for="name">*Ciudad</label>
+                                                      {{ accountForm.render('city')}}
+                                                  </div>
+
+                                                  
+                                                  
+                                                  <div id="nit-container" class="form-group" style="display: none;">
+                                                      <label for="code">NIT</label>
+                                                      {{ accountForm.render('nit')}}
+                                                  </div>
+
+                                                  <div class="form-group" id="accountplan-container" >
+                                                      <label for="idAccountplan">*Plan</label>
+                                                      {{ accountForm.render('idAccountplan', {'id': "idAccountplan", 'class': "form-control", 'required': "required", 'name': "idAccountplan"})}}            
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                      <div class="text-center" id="loader" style="display: none;">
+                                                          <img src="{{url('')}}images/loaders/pacman.gif" width="40">
+                                                      </div>
+
+                                                      <div class="" id="accountplan-data-container" style="display: none;">
+                                                          <table class="table table-responsive">
+                                                              <tbody>
+                                                                  <tr>
+                                                                      <td>    
+                                                                          <span id="ap-name" style="font-weight: 800; font-size: 1.2em;"></span> <br>
+                                                                          <span id="ap-price"></span> <br>
+                                                                          <span id="ap-current"></span>
+                                                                      </td>
+                                                                      <td>
+                                                                          <ul>
+                                                                              <li>
+                                                                                  Encuestas: <span id="ap-surveyQuantity"></span>
+                                                                              </li>
+                                                                              <li>
+                                                                                  Preguntas: <span id="ap-questionQuantity"></span>
+                                                                              </li>
+                                                                              <li>
+                                                                                  Usuarios: <span id="ap-userQuantity"></span>
+                                                                              </li>
+                                                                              <li>
+                                                                                  <span id="ap-advertising" style="font-weight: 300;">
+                                                                                      Publicidad en app
+                                                                                  </span>
+                                                                              </li>
+                                                                              <li>
+                                                                                  <span id="ap-sendSMSAuto" style="font-weight: 300;">
+                                                                                      Envío de SMS Automáticos
+                                                                                  </span>
+                                                                              </li>
+                                                                              <li>
+                                                                                  Sitios a evaluar: <span id="ap-sitesQuantity"></span>
+                                                                              </li>
+                                                                              <li>
+                                                                                  <span id="ap-sendSMS" style="font-weight: 300;">
+                                                                                      Envío de SMS
+                                                                                  </span>
+                                                                              </li>
+                                                                              <li>
+                                                                                  <span id="ap-exportContact" style="font-weight: 300;">
+                                                                                      Exportación de contactos
+                                                                                  </span>
+                                                                              </li>
+                                                                          </ul>        
+                                                                      </td>
+                                                                  </tr>
+                                                              </tbody>
+                                                          </table> 
+                                                      </div>
+                                                  </div>
+                                                      
+                                                  <div class="form-group">
+                                                      <label>*Estoy de acuerdo con las politicas</label>
+                                                      {{ userForm.render('agree')}}
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="wizard-footer">
+                                      <div class="pull-right">
+                                          <input type='button' class='btn btn-next btn-success' name='next' value='Siguiente' />
+                                          <input type='submit' class='btn btn-finish btn-success' name='finish' value='Finalizar' />
+                                      </div>
+                                      <div class="pull-left">
+                                          <input type='button' class='btn btn-previous btn-default btn-sm' name='previous' value='Atras' />
+                                      </div>
+                                      <div class="clearfix"></div>
+                                  </div>  
+                              </form>
+                          </div>
+                  
+                      </div> <!-- wizard container -->
+                  </div>
+                  </div><!-- end row -->
+              </div> <!--  big container -->    
+
+
+                  <div class="style-footer-clear">
+                      <div class="social-networks-clear">
+                          <ul>
+                              <li>
+                                  <i class="fa fa-facebook"></i>
+                              </li>
+                              <li>
+                                  <i class="fa fa-twitter"></i>
+                              </li>
+                              <li>
+                                  <i class="fa fa-youtube"></i>
+                              </li>
+                              <li>
+                                  <i class="fa fa-instagram"></i>
+                              </li>
+                          </ul>    
+                      </div>    
+                  </div>    
+              </div>
+          </div>
+      </div>
+  </div>
 {% endblock %}

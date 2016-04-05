@@ -12,34 +12,8 @@
         {% block css %}{% endblock %}
     </head>
     <body>
-        <div class="image-container set-full-height" style="background-image: url('{{url('')}}images/backgrounds/city.jpg')">
-            <div class="container-fluid fill">
-                <div class="row fill">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        {% block content %} {% endblock %}
-
-                        <div class="style-footer-clear">
-                            <div class="social-networks-clear">
-                                <ul>
-                                    <li>
-                                        <i class="fa fa-facebook"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-twitter"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-youtube"></i>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-instagram"></i>
-                                    </li>
-                                </ul>    
-                            </div>    
-                        </div>    
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% block content %} {% endblock %}
+        
         {{ javascript_include('vendors/bootstrap/js/bootstrap.min.js') }}
         {% block javascript %}{% endblock %}
     </body>
