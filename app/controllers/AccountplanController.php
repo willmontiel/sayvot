@@ -156,7 +156,7 @@ class AccountplanController extends ControllerBase {
             $accountplan['exportContact'] = $ap->exportContact;
         }
         
-        sleep(4);
+        //sleep(4);
         
         return $this->setJsonResponse($accountplan, 200);
     }

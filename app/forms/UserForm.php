@@ -105,8 +105,8 @@ class UserForm extends Form {
         )));
 
         $this->add(new Select('gender', array(
-            "male" => "Masculino",
-            "female" => "Femenino"
+            "male" => "M",
+            "female" => "F"
         )));
 
         $this->add(new Text('twitter', array(

@@ -76,36 +76,6 @@
                                 </li>
                             </ul>    
                         </div>   
-                        <div class="smart-menu">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        Herramientas
-                                    </a>
-                                </li>
-                                
-                                <li>
-                                    <a href="#">
-                                        Encuestas
-                                    </a>    
-                                </li>
-                                
-                                <li>
-                                    <a href="#">
-                                        Usuarios
-                                    </a>    
-                                </li>
-                                
-                                <li>
-                                    <a href="#">
-                                        Cuentas
-                                    </a>
-                                </li>
-                                
-                            </ul>    
-                        </div>  
-                        
-                         
                     </div>    
                 </div>
             </div>

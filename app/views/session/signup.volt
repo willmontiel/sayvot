@@ -7,11 +7,12 @@
     {{ javascript_include('vendors/x-bootstrap-wizard-v1.1/assets/js/jquery.bootstrap.wizard.js') }}
     {{ javascript_include('vendors/x-bootstrap-wizard-v1.1/assets/js/jquery.validate.min.js') }}
     {{ javascript_include('vendors/x-bootstrap-wizard-v1.1/assets/js/wizard.js') }}
-    {{ javascript_include('vendors/select2-4.0.1/js/select2.min.js') }}
+    {{ javascript_include('vendors/select2-4.0.1/js/select2.full.min.js') }}
     <script type="text/javascript">
         $(function(){
             var id = 1;
             $(".select2").select2();
+           
            
             $('#idAccounttype').select2().on("select2:select", function(e) {
                 $('#nit-container').hide('fast');
@@ -36,7 +37,10 @@
                 }
             });
             
-            $('.country').select2().on("select2:select", function(e) {
+            $('.country').select2({
+                placeholder: "Select a state",
+                allowClear: true
+            }).on("select2:select", function(e) {
                 id = $(this).val();
                 $("#idAccountplan").select2({
                     ajax: {
@@ -135,7 +139,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label>*Nombre(s)</label>
-                                                  {{ userForm.render('name')}}
+                                                    {{ userForm.render('name')}}
                                                 </div>
                                                 
                                                 <div class="form-group">

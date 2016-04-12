@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Mvc\Model\Validator\Uniqueness,
+    Phalcon\Mvc\Model\Validator\StringLength,
     Phalcon\Mvc\Model\Validator\Email;
 
 class Credential extends BaseModel {

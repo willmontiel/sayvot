@@ -21,9 +21,10 @@ class SessionController extends ControllerBase {
                 $pass2 = $userForm->getValue('pass2');
                 
                 $this->validateEqualsPassword($pass1, $pass2);
+                
                 $accounttype = $accountForm->getValue('idAccounttype');
                 $account->status = 1;
-                $account->confirm = 1;
+                $account->confirm = 0;
                 $account->idCountry = $accountForm->getValue('accountIdCountry');
                 
                 if ($accounttype == 3) {
@@ -42,12 +43,12 @@ class SessionController extends ControllerBase {
                 if ($this->saveModel($account, null)) {
                     $user->idAccount = $account->idAccount;
                     $user->status = 1;
-                    $user->country = $userForm->getValue('accountAddress');
+                    
                     if ($this->saveModel($user, null)) {
                         $credential = new Credential();
                         $credential->idUser = $user->idUser;
                         $credential->firstTime = 1;
-                        $credential->username = $this->request->getPost('username');
+                        $credential->email = $this->request->getPost('email');
                         $credential->password = $this->hash->hash($pass1);
                         if ($this->saveModel($credential, "Se ha guardado el perfil exitosamente")) {
                             $this->db->commit();
@@ -82,6 +83,9 @@ class SessionController extends ControllerBase {
     }
 	
     public function loginAction() {
+        $loginForm = new LoginForm();
+	$this->view->loginForm = $loginForm;
+        
         if ($this->request->isPost()) {
             $login = $this->request->getPost("email");
             $password = $this->request->getPost("password");
@@ -92,10 +96,17 @@ class SessionController extends ControllerBase {
             ));
 	
             if ($credential && $this->hash->checkHash($password, $credential->password)) {
+                    if ($credential->firstTime == 1) {
+                        
+                    }
+                
                     $user = User::findFirstByIdUser($credential->idUser);
                     $account = Account::findFirstByIdAccount($user->idAccount);
-
-                    if ($account && $account->status == 1) {
+                    
+                    if ($account && $account->confirm == 0) {
+                        $this->flashSession->error("Esta cuenta no ha sido confirmada, por favor revisa tu correo y sigue los pasos");
+                    }
+                    else if ($account && $account->status == 1) {
                         $this->session->set('userid', $user->idUser);
                         $this->session->set('authenticated', true);
                         $this->user = $user;

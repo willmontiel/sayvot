@@ -70,4 +70,8 @@ class AccountController extends ControllerBase {
     public function DeactivateAction() {
         
     }
+    
+    public function verifyaccountAction($code) {
+        
+    }
 }

@@ -29,32 +29,32 @@ class Account extends BaseModel {
     public function validation() {
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             'field' => 'name',
-            "message" => "Debes enviar un nombre, para identificar la cuenta"
+            "message" => "Debes enviar un nombre, para identificar la empresa"
         )));
 
         $this->validate(new Uniqueness(array(
             'field' => 'name',
-            "message" => "Ya existe una cuenta con el nombre ingresado"
+            "message" => "Ya existe una empresa con el nombre ingresado"
         )));
         
         $this->validate(new Email(array(
             "field"   => 'email',
-            "message" => "Debes enviar una dirección de correo eléctronica válida"
+            "message" => "Debes enviar una dirección de correo eléctronica válida para la empresa"
         )));
         
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"   => 'phone',
-            "message" => "Debes un número de telefono o celular"
+            "message" => "Debes un número de telefono o celular para la empresa"
         )));
         
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"  => 'address',
-            "message" => "Debes enviar una dirección válida"
+            "message" => "Debes enviar una dirección de donde estaá ubicada la empresa"
         )));
         
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"  => 'city',
-            "message" => "Debes enviar una ciudad válida"
+            "message" => "Debes enviar la ciudad en donde está ubicada la empresa"
         )));
         
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
