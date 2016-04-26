@@ -27,24 +27,6 @@ class UserForm extends Form {
             'id' => 'lastname'
         )));
         
-        $this->add(new Select('country', Country::find(), array(
-            'using' => array('name', 'name'),
-            'class' => 'select2 form-control',
-            'required' => 'required',
-        )));
-        
-        $this->add(new Select('city', City::find(), array(
-            'using' => array('name', 'name'),
-            'class' => 'form-control select2',
-            'required' => 'required',
-        )));
-        
-        $this->add(new Select('state', State::find(), array(
-            'using' => array('name', 'name'),
-            'class' => 'form-control select2',
-            'required' => 'required',
-        )));
-        
         $this->add(new Check('agree', array(
             'value' => 1,
             'id' => 'agree',
@@ -104,10 +86,12 @@ class UserForm extends Form {
             'id' => 'pass2'
         )));
 
-        $this->add(new Select('gender', array(
-            "male" => "M",
-            "female" => "F"
-        )));
+        $this->add(new Select('gender', 
+            array(
+                "male" => "M",
+                "female" => "F"
+            )
+        ));
 
         $this->add(new Text('twitter', array(
             'maxlength' => 100,

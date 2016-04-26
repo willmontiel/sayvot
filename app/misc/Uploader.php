@@ -41,7 +41,7 @@ class Uploader {
     }
     
     /**
-     * Receives the maximun size supported in files load, and with this info the object valids the file 
+     * Receives the maximun size supported in files load, and with this info the object valids the file in bytes
      * @param string $size
      */
     public function setMaxSizeSupported($size)

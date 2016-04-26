@@ -257,16 +257,6 @@ class AppConfig {
         $this->di->set('tmp', $tmp);
     }
 	
-
-    /*
-     * Configuración de archivos que el usuario carga al servidor, como por ejemplo el peso.
-     */
-    private function setUploadConfig() {
-            $uploadConfig = new \stdClass();
-            $uploadConfig->images = $this->config->upload->images;
-            $uploadConfig->attachment = $this->config->upload->attachment;
-            $this->di->set('uploadConfig', $uploadConfig);
-    }
 	
     /**
      * Gestor de sesiones
@@ -385,6 +375,17 @@ class AppConfig {
         $path->path = $this->config->uri->path;
         $this->di->set('path', $path);
     }
+
+    /*
+     * Configuración de archivos que el usuario carga al servidor, como por ejemplo el peso.
+     */
+    private function setUploadConfig() {
+      $uploader = new \stdClass();
+      $uploader->images_max_size = $this->config->upload->images_max_size;
+      $uploader->user_avatar_dir = $this->config->upload->user_avatar_dir;
+      $this->di->set('uploader', $uploader);
+    }
+
 
     public function getDi() {
         return $this->di;

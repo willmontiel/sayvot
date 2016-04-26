@@ -27,12 +27,11 @@ class ParametersEncoder {
         $md5 = $parameters[count($parameters)-1];
         unset($parameters[count($parameters)-1]);
 
-
         $src = $this->baseUri . $action . '/' . implode('-', $parameters);
         $vermd5 = $this->getMD5($src);
 
         if ($md5 !== $vermd5) {
-                throw new \InvalidArgumentException('MD5 no concuerda');
+            throw new \InvalidArgumentException('MD5 no concuerda');
         }
 
         return $parameters;

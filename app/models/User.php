@@ -9,9 +9,6 @@ class User extends BaseModel {
     public $status;
     public $name;
     public $lastname;
-    public $country;
-    public $state;
-    public $city;
     public $phone;
     public $address;
     public $twitter;
@@ -42,21 +39,6 @@ class User extends BaseModel {
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"  => 'address',
             "message" => "Debes enviar una dirección válida"
-        )));
-        
-        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
-            "field"  => 'city',
-            "message" => "Debes enviar una ciudad válida"
-        )));
-        
-        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
-            "field"  => 'country',
-            "message" => "Debes enviar un país válido"
-        )));
-        
-        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
-            "field"  => 'state',
-            "message" => "Debes enviar un estado, departamento o provincia válida"
         )));
         
         return $this->validationHasFailed() != true;

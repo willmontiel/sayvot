@@ -340,3 +340,11 @@ html, body{
 .select2-container{ 
     width: 100% !important;
 }
+
+.chosen-container {
+    width: 100% !important;
+}
+
+.error {
+    color: #FF3B30;
+}

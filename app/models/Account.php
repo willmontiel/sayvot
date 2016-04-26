@@ -15,6 +15,7 @@ class Account extends BaseModel {
     public $phone;
     public $address;
     public $nit;
+    public $state;
     public $city;
     public $status;
     public $confirm;
@@ -55,6 +56,11 @@ class Account extends BaseModel {
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(
             "field"  => 'city',
             "message" => "Debes enviar la ciudad en donde está ubicada la empresa"
+        )));
+        
+        $this->validate(new \Sayvot\Validators\SpaceValidator(array(
+            "field"  => 'state',
+            "message" => "Debes enviar el estado/departamento/provincia en donde está ubicada la empresa"
         )));
         
         $this->validate(new \Sayvot\Validators\SpaceValidator(array(

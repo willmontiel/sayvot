@@ -121,7 +121,7 @@ class AccountplanController extends ControllerBase {
         foreach ($aps as $value) {
             $obj = new stdClass();
             $obj->id = $value->idAccountplan;
-            $obj->text = $value->name;
+            $obj->name = $value->name;
             
             $accountplans[] = $obj;
         }

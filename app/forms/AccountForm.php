@@ -51,12 +51,24 @@ class AccountForm extends Form {
             'id' => 'phone'
         )));
         
-        $this->add(new Select('accountIdCountry', Country::find(), array(
-            'using' => array('idCountry', 'name'),
-            'class' => 'country form-control',
+        $countries = array("" => "Seleccione una opción");
+        foreach (Country::find() as $country) {
+            $countries[$country->idCountry] = $country->name;
+        }
+        
+        $this->add(new Select('idCountry', $countries, array(
+            'class' => 'form-control',
             'required' => 'required',
-            'autofocus' => "autofocus",
-            'id' => 'idCountry'
+        )));
+        
+        $this->add(new Select('state', array(), array(
+            'class' => 'form-control',
+            'required' => 'required',
+        )));
+        
+        $this->add(new Select('city', array(), array(
+            'class' => 'form-control',
+            'required' => 'required',
         )));
         
         $this->add(new Text('accountName', array(
@@ -95,31 +107,18 @@ class AccountForm extends Form {
             'id' => 'phone'
         )));
         
-        $this->add(new Select('idCountry', Country::find(), array(
-            'using' => array('idCountry', 'name'),
-            'class' => 'country form-control',
-            'required' => 'required',
-            'autofocus' => "autofocus",
-            'id' => 'idCountry'
-        )));
-        
         $this->add(new Select('idAccountplan', array(
             
         )));
         
-        $this->add(new Select('idAccounttype', Accounttype::find(), array(
-            'using' => array('idAccounttype', 'name'),
-            'class' => 'form-control',
-            'required' => 'required',
-            'id' => 'idAccounttype'
-        )));
         
-        $this->add(new Select('city', City::find(), array(
-            'using' => array('name', 'name'),
+        $accounttypes = array("" => "Seleccione una opción");
+        foreach (Accounttype::find() as $accounttype) {
+            $accounttypes[$accounttype->idAccounttype] = $accounttype->name;
+        }
+        $this->add(new Select('idAccounttype', $accounttypes, array(
             'class' => 'select2 form-control',
             'required' => 'required',
-            'autofocus' => "autofocus",
-            'id' => 'city'
         )));
         
         $this->add(new Check('status', array(
