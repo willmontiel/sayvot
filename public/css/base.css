@@ -348,3 +348,7 @@ html, body{
 .error {
     color: #FF3B30;
 }
+
+.icon-menu {
+  font-size: 200px;
+}

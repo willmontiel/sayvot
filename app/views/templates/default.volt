@@ -13,33 +13,95 @@
         {% block css %}{% endblock %}
     </head>
     <body>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <a class="navbar-brand" href="http://www.sayvot.com/">
+              <img alt="SayVot" width="30" height="30" src="{{url('')}}images/logo.png">
+            </a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              {# <li class="active"> #}
+              <li>
+                <a href="{{url('')}}">Inicio</a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Herramientas <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Usuarios</a></li>
+                  <li><a href="#">Mi Plan</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{{url('configuration')}}">Configuración</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #8BC53E">
+                  Encuestas <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{url('survey')}}">Mis Encuentas</a></li>
+                  <li><a href="#">Nueva Encuesta</a></li>
+                  {#
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">One more separated link</a></li>
+                  #}
+                </ul>
+              </li>
+            </ul>
+            
+            
+            <ul class="nav navbar-nav navbar-right">
+              <li style="background-color: white;">
+                <a href="#">
+                  <img src="{{url('')}}/assets/22/images/avatar/22.png" width="25" height="25" />
+                </a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Will Montiel <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Cambiar Contraseña</a></li>
+                  <li><a href="#">Mi perfil</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{{url('session/logout')}}">Cerrar Sesión</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      
+      {#
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
                             <a href="{{url('')}}">
                                 <img class="principal-logo" src="{{url('')}}images/sayvot-logo-horizontal.png" >
                             </a>
                         </div>
-                        <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Cambiar Contraseña</a></li>
-                                <li><a href="#">Salir</a></li>
-                                <li><a href="#">Will Montiel</a></li>
-                            </ul>
-                        </div>
+                          
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Cambiar Contraseña</a></li>
+                            <li><a href="#">Salir</a></li>
+                            <li><a href="#">Will Montiel</a></li>
+                        </ul>
+                      </div>
                     </div>
                 </div>
             </div>
         </nav>
-
+#}
         <div class="container-fluid fill">
             <div class="row fill">
                 

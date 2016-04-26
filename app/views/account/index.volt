@@ -1,7 +1,6 @@
 {% extends "templates/default.volt" %}
 {% block css %}{% endblock%}
 {% block javascript %}{% endblock%}
-{% block title %}<i class="fa fa-instagram"></i> Cuentas{% endblock%}
 {% block content %}
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
