@@ -4,7 +4,7 @@
 {% block title %}<i class="fa fa-instagram"></i> Monedas{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-12">
             <h1 class="page-header">Registra un nuevo tipo de moneda.</h1>
         </div>    
     </div>    

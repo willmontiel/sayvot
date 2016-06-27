@@ -6,7 +6,7 @@ use \Phalcon\Mvc\Model\Validator;
 use \Phalcon\Mvc\Model\ValidatorInterface;
 
 class SpaceValidator extends Validator implements ValidatorInterface {
-    public function validate(\Phalcon\Mvc\ModelInterface $model) {
+    public function validate(\Phalcon\Mvc\EntityInterface  $model) {
         $message = $this->getOption('message');
         $field  = $this->getOption('field');
 

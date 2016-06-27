@@ -3,13 +3,13 @@
 {% block javascript %}{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-12">
             <h1 class="page-header">Este es listado de cuentas registradas en la plataforma</h1>
         </div>    
     </div>   
     
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-12">
             <div class="text-right">
                 <a href="{{url('account/add')}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
@@ -20,7 +20,7 @@
     
     {% if page.items|length > 0%}
         <div class="row">
-            <div class="col-md-offset-3 col-md-6">
+            <div class="col-md-12">
                 <div class="row">
                     {{ partial('partials/pagination', ['pagination_url': 'account/index']) }}
                 </div>

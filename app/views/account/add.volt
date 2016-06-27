@@ -75,7 +75,7 @@
 {% block title %}<i class="fa fa-instagram"></i> Cuentas {% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-12">
             <h1 class="page-header">Crea una nueva cuenta</h1>
         </div>    
     </div>    
