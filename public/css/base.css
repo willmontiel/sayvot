@@ -12,28 +12,6 @@ and open the template in the editor.
   src: url(fonts/coolvetica/coolvetica.ttf);
 }
 
-html, body{
-    height: 100%;
-    min-height: 100%;
-}
-
-.fill {
-    height: 100%;
-    min-height: 100%;
-}
-/*
- * Top navigation
- * Hide default border to remove 1px line.
- */
-.navbar-fixed-top {
-    border-bottom: 1px solid white;
-}
-
-.principal-logo {
-    width: 140px;
-    height: 61px;
-}
-
 .navbar-inverse {
     background-color: #000 !important;
 }
@@ -69,19 +47,12 @@ html, body{
 
 
 .style-footer {
-    width: 100%;
-    background-color: white;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    border-top: 1px solid black;
-    z-index: 9999999;
+    display: inline-block;
 }
 
 .style-footer ul {
     width: 250px;
     padding: 5px;
-    margin-left: 40%;
 }
 
 .style-footer li {
