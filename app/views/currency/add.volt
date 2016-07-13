@@ -1,10 +1,10 @@
 {% extends "templates/default.volt" %}
 {% block css %}{% endblock%}
 {% block javascript %}{% endblock%}
-{% block title %}<i class="fa fa-instagram"></i> Monedas{% endblock%}
+{% block title %}{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-offset-2 col-md-8 text-center">
             <h1 class="page-header">Registra un nuevo tipo de moneda.</h1>
         </div>    
     </div>    
@@ -39,7 +39,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="exportContact">*Estado</label>
+                    <label for="status">*Estado</label>
                     <div class="onoffswitch">
                         {{ currencyForm.render('status')}}
                         <label class="onoffswitch-label" for="status">

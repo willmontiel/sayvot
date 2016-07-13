@@ -72,10 +72,10 @@
         });
     </script>   
 {% endblock%}
-{% block title %}<i class="fa fa-instagram"></i> Cuentas {% endblock%}
+{% block title %}{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-offset-2 col-md-8 text-center">
             <h1 class="page-header">Crea una nueva cuenta</h1>
         </div>    
     </div>    

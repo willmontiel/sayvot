@@ -4,7 +4,7 @@
 {% block title %}<i class="fa fa-instagram"></i> Monedas{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-offset-2 col-md-8 text-center">
             <h1 class="page-header">Estas editando el tipo de moneda <em><strong>{{currency.name}}</strong></em>.</h1>
         </div>    
     </div>    

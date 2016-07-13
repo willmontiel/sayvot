@@ -10,10 +10,10 @@
         });
     </script>    
 {% endblock%}
-{% block title %}<i class="fa fa-instagram"></i> Planes de pago{% endblock%}
+{% block title %}{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-offset-2 col-md-8 text-center">
             <h1 class="page-header">Registra un plan de pago con las caracteristicas que necesites.</h1>
         </div>    
     </div>    

@@ -10,10 +10,10 @@
         });
     </script>    
 {% endblock%}
-{% block title %}<i class="fa fa-instagram"></i> Planes de pago{% endblock%}
+{% block title %}{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
+        <div class="col-md-offset-3 col-md-6 text-center">
             <h1 class="page-header">Edita la configuración del plan de pago <em>{{accountplan.name}}</em>.</h1>
         </div>    
     </div>    

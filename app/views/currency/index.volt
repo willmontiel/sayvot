@@ -1,16 +1,16 @@
 {% extends "templates/default.volt" %}
 {% block css %}{% endblock%}
 {% block javascript %}{% endblock%}
-{% block title %}<i class="fa fa-instagram"></i> Monedas{% endblock%}
+{% block title %}{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-offset-2 col-md-8 text-center">
             <h1 class="page-header">Conoce cuales tipos de monedas han sido registradas en el sistema.</h1>
         </div>    
     </div>   
     
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-offset-2 col-md-8 text-center">
             <div class="text-right">
                 <a href="{{url('currency/add')}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
@@ -21,7 +21,7 @@
     
     {% if page.items|length > 0%}
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-offset-2 col-md-8">
                 <div class="row">
                     {{ partial('partials/pagination', ['pagination_url': 'currency/index']) }}
                 </div>

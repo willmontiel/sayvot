@@ -104,6 +104,61 @@ class ControllerBase extends \Phalcon\Mvc\Controller {
         throw new InvalidArgumentException($m);
     }
     
+    
+    /**
+   * @param type $form
+   * @param type $model
+   * @param type $successMsg
+   * @return boolean
+   * @throws InvalidArgumentException
+   */
+  protected function saveModelWithFormValidation($form, $model, $successMsg) {
+    if ($form->isValid() && $model->save()) {
+      if (!empty($successMsg)) {
+        $this->flashSession->success($successMsg);
+      }
+      return true;
+    }
+
+    $m = "";
+    foreach ($form->getMessages() as $msg) {
+      $m .= $msg . "<br>";
+    }
+    
+    foreach ($model->getMessages() as $msg) {
+      $m .= $msg . "<br>";
+    }
+
+    throw new InvalidArgumentException($m);
+  }
+  
+  /**
+   * @param type $form
+   * @param type $model
+   * @param type $successMsg
+   * @return boolean
+   * @throws InvalidArgumentException
+   */
+  protected function updateModelWithFormValidation($form, $model, $successMsg) {
+    if ($form->isValid() && $model->update()) {
+      if (!empty($successMsg)) {
+        $this->flashSession->notice($successMsg);
+      }
+      return true;
+    }
+
+    $m = "";
+    foreach ($form->getMessages() as $msg) {
+      $m .= $msg . "<br>";
+    }
+    
+    foreach ($model->getMessages() as $msg) {
+      $m .= $msg . "<br>";
+    }
+
+    throw new InvalidArgumentException($m);
+  }
+    
     /**
      * Valida si un modelo existe, en caso de que no carga el mensaje pasado por parametro en flashSession y redirige a la acción o controlador que ha sido
      * pasado como párametro

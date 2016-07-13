@@ -27,5 +27,11 @@
           <h4><a href="{{url('currency')}}">Tipos de moneda</a></h4>
           <span class="text-muted">Currency</span>
       </div>
+          
+      <div class="col-xs-6 col-sm-3 placeholder">
+          <i class="fa fa-bookmark icon-menu" aria-hidden="true"></i>
+          <h4><a href="{{url('subject')}}">Temas de encuesta</a></h4>
+          <span class="text-muted">Subject</span>
+      </div>
   </div>
 {% endblock %}
