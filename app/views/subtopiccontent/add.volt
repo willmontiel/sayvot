@@ -4,8 +4,8 @@
 {% block title %}{% endblock%}
 {% block content %}
     <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <h1 class="page-header">Registra un nuevo tema</h1>
+        <div class="col-md-offset-3 col-md-6 text-center">
+            <h1 class="page-header">Añadir contenido al sub-tema: <em class="bold">{{subtopic.name}}</em>.</h1>
         </div>    
     </div>    
     
@@ -17,7 +17,7 @@
     
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
-            <form method="post" action="{{url('subject/add')}}">
+            <form method="post" action="{{url('subtopiccontent/add')}}/{{subtopic.idSubtopic}}">
                 {% for element in form %}
                   <div class="form-group">
                     {{ element.label(['class': 'control-label']) }}
@@ -35,10 +35,12 @@
                   </div>
                 {% endfor %}
                 <div class="form-group text-right">
-                  <a href="{{url('subject')}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                  <a href="{{url('subtopiccontent/index')}}/{{subtopic.idSubtopic}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                   <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
                 </div>
             </form>
         </div>    
     </div>    
 {% endblock %}
+
+

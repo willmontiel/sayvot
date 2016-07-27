@@ -63,7 +63,7 @@ class SubtopicController extends ControllerBase {
         $subtopic->status = (empty($status) ? 0 : 1);
         
         if ($this->updateModelWithFormValidation($form, $subtopic, "Se ha editado el sub-tema exitosamente")) {
-          return $this->response->redirect("subtopic/index/{$id}");
+          return $this->response->redirect("subtopic/index/{$subtopic->idSubject}");
         }
       } catch (InvalidArgumentException $ex) {
         $this->flashSession->error($ex->getMessage());

@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-md-offset-3 col-md-6 text-center">
       <h1 class="page-header">Este es el listado de tus encuestas</h1>
     </div>    
   </div>   

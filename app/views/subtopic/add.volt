@@ -34,7 +34,7 @@
                     {% endif %}
                   </div>
                 {% endfor %}
-                <div class="form-group">
+                <div class="form-group text-right">
                   <a href="{{url('subtopic/index')}}/{{subject.idSubject}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                   <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
                 </div>

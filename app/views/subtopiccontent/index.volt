@@ -5,15 +5,15 @@
 {% block content %}
     <div class="row">
         <div class="col-md-offset-2 col-md-8 text-center">
-            <h1 class="page-header">Este el listado de sub-temas del tema: <em class="bold">{{subject.name}}</em>.</h1>
+            <h1 class="page-header">Este es el listado de contenidos del sub-tema: <em class="bold">{{subtopic.name}}</em>.</h1>
         </div>    
     </div>   
     
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <div class="text-right">
-              <a href="{{url('subject')}}" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Regresar al listado de temas"><i class="fa fa-reply"></i></a>
-              <a href="{{url('subtopic/add')}}/{{subject.idSubject}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+              <a href="{{url('subtopic/index')}}/{{subtopic.idSubject}}" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="Regresar al listado de sub-temas"><i class="fa fa-reply"></i></a>
+              <a href="{{url('subtopiccontent/add')}}/{{subtopic.idSubtopic}}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
             </div>
             <br>
             {{flashSession.output()}}
@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="row">
-                    {{ partial('partials/pagination', ['pagination_url': 'subject/index/' ~ subject.idSubject ]) }}
+                    {{ partial('partials/pagination', ['pagination_url': 'subtopiccontent/index/' ~ subtopic.idSubtopic ]) }}
                 </div>
 
                 <div class="table-responsive">
@@ -40,7 +40,7 @@
                         <tbody>
                             {% for item in page.items %}
                                 <tr {% if item.status == 0 %}class="danger"{% endif %}>
-                                    <td>{{item.idSubtopic}}</td>
+                                    <td>{{item.idSubtopicContent}}</td>
                                     <td>
                                       <strong>{{item.name}}</strong> <br>
                                       <em><span class="small">Creado {{date('d/M/Y H:i', item.createdon)}} <br> Actualizado {{date('d/M/Y H:i', item.updatedon)}}</span></em>
@@ -49,8 +49,7 @@
                                       <span class="small">{{item.description}}</span>
                                     </td>
                                     <td class="text-right">
-                                      <a href="{{url('subtopic/update')}}/{{item.idSubtopic}}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></i></a>
-                                      <a href="{{url('subtopiccontent/index')}}/{{item.idSubtopic}}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Listado de contenidos"><i class="fa fa-commenting"></i></i></a>
+                                      <a href="{{url('subtopiccontent/update')}}/{{item.idSubtopicContent}}" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i></i></a>
                                     </td>
                                 </tr>   
                             {% endfor %}
@@ -59,7 +58,7 @@
                 </div>
 
                 <div class="row">
-                    {{ partial('partials/pagination', ['pagination_url': 'subject/index/' ~ subject.idSubject ]) }}
+                    {{ partial('partials/pagination', ['pagination_url': 'subtopiccontent/index/' ~ subtopic.idSubtopic ]) }}
                 </div>
 
                 {#
@@ -68,7 +67,8 @@
             </div>
         </div>
     {% else %}        
-        {{ partial('partials/empty-rows', ['resource_name': 'Sub-temas', 'resource_url': 'subtopic/add/' ~ subject.idSubject]) }}
+        {{ partial('partials/empty-rows', ['resource_name': 'Sub-temas', 'resource_url': 'subtopiccontent/add/' ~ subtopic.idSubtopic]) }}
     {% endif %} 
 {% endblock %} 
+
 

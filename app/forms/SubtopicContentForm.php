@@ -7,24 +7,24 @@ use Phalcon\Forms\Form,
 use Phalcon\Validation\Validator\StringLength;
 use Sayvot\Validators\SpaceValidatorForm;
 
-class SubtopicForm extends Form {
+class SubtopicContentForm extends Form {
 
   public function initialize($entity = null, $options = array()) {
     $name = new Text('name', array(
         'maxlength' => 100,
-        'placeholder' => 'Nombre del sub-tema',
+        'placeholder' => 'Nombre del contenido del sub-tema',
         'required' => 'required',
         'class' => 'form-control',
         'autofocus' => 'autofocus',
         'id' => 'name',
     ));
-    $name->setLabel("*Nombre del sub-tema");
+    $name->setLabel("*Nombre del contenido del sub-tema");
     $name->addValidator(new SpaceValidatorForm(array('message' => 'El campo nombre se encuentra vacío')));
     $name->addValidator(new StringLength(array(
         'min' => 2, 
-        'messageMinimum' => 'El nombre del sub-tema es demasiado corto, debe tener al menos 2 carateres',
+        'messageMinimum' => 'El nombre del contenido del sub-tema es demasiado corto, debe tener al menos 2 carateres',
         'max' => 800,
-        'messageMaximum' => 'El nombre del sub-tema es demasiado largo, debe tener máximo 800 carateres',
+        'messageMaximum' => 'El nombre del contenido del sub-tema es demasiado largo, debe tener máximo 800 carateres',
     )));
     $this->add($name);
     

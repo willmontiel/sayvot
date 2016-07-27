@@ -49,8 +49,10 @@
                     </label>
                 </div> 
                 
-                <a href="{{url('currency')}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
-                <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
+                <div class="form-group text-right">
+                  <a href="{{url('currency')}}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                  <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>
+                </div> 
             </form>
         </div>    
     </div>    
