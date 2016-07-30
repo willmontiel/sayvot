@@ -25,6 +25,7 @@ class Account extends BaseModel {
         $this->belongsTo("idAccountplan", "Accountplan", "idAccountplan");
         $this->belongsTo("idAccounttype", "Accounttype", "idAccounttype");
         $this->hasMany("idAccount", "User", "idAccount");
+        $this->hasMany("idAccount", "Survey", "idAccount");
     }
     
     public function validation() {

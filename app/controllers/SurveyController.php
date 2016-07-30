@@ -5,7 +5,11 @@ class SurveyController extends ControllerBase {
       
     }
     
-    public function newAction() {
+    public function draftAction() {
+      
+    }
+    
+    public function finishAction() {
       
     }
 }

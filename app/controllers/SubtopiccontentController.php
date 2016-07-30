@@ -73,5 +73,33 @@ class SubtopiccontentController extends ControllerBase {
       }
     }
   }
+  
+  public function getsubtopicscontentAction($idSubtopic) {
+    try {
+      $subtopicsContent = SubtopicContent::find(array(
+          "conditions" => "idSubtopic = ?0 AND status = ?1",
+          "bind" => array($idSubtopic, 1)
+      ));
+      
+      $obj = new stdClass();
+      $obj->id = 0;
+      $obj->text = "Seleccione una opción";
+      $array = array($obj);
+      
+      foreach ($subtopicsContent as $subtopicContent) {
+        $obj = new stdClass();
+        $obj->id = $subtopicContent->idSubtopicContent;
+        $obj->text = $subtopicContent->name;
+        $array[] = $obj;
+      }
+      return $this->setJsonResponse($array, 200);
+    } catch (InvalidArgumentException $ex) {
+      return $this->setJsonResponse($ex->getMessage(), 400);
+    } catch (Exception $ex) {
+      $this->logger->log("Exception while getting subtopics content by {$idSubtopic}: " . $ex->getMessage());
+      $this->logger->log($ex->getTraceAsString());
+      return $this->setJsonResponse("Ha ocurrido un error, por favor contacta al administrador", 500);
+    }
+  }
 }
 

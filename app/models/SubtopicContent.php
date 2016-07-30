@@ -12,6 +12,7 @@ class SubtopicContent extends BaseModel {
 
   public function initialize() {
     $this->belongsTo("idSubtopic", "Subtopic", "idSubtopic");
+    $this->hasMany("idSubtopicContent", "Survey", "idSubtopicContent");
   }
 
   public function getSource() {

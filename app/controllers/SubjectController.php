@@ -65,4 +65,32 @@ class SubjectController extends ControllerBase {
       }
     }
   }
+  
+  public function getsubjectsAction() {
+    try {
+      $subjects = Subject::find(array(
+          "conditions" => "status = ?0",
+          "bind" => array(1)
+      ));
+      
+      $obj = new stdClass();
+      $obj->id = 0;
+      $obj->text = "Seleccione una opción";
+      $array = array($obj);
+      
+      foreach ($subjects as $subject) {
+        $obj = new stdClass();
+        $obj->id = $subject->idSubject;
+        $obj->text = $subject->name;
+        $array[] = $obj;
+      }
+      return $this->setJsonResponse($array, 200);
+    } catch (InvalidArgumentException $ex) {
+      return $this->setJsonResponse($ex->getMessage(), 400);
+    } catch (Exception $ex) {
+      $this->logger->log("Exception while getting subjects: " . $ex->getMessage());
+      $this->logger->log($ex->getTraceAsString());
+      return $this->setJsonResponse("Ha ocurrido un error, por favor contacta al administrador", 500);
+    }
+  }
 }
