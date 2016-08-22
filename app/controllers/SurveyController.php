@@ -5,9 +5,9 @@ class SurveyController extends ControllerBase {
       
     }
     
-    public function draftAction() {
+    public function newAction() {
       if ($this->request->isPost()) {
-        
+        $this->logger->log("LALA");
       }
     }
     

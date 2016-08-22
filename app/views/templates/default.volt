@@ -188,16 +188,13 @@
         <!-- Javascript Libs -->
         {{ javascript_include('vendors/jquery/jquery-1.12.0.min.js') }}
         {{ javascript_include('vendors/bootstrap/js/bootstrap.min.js') }}
-        {{ javascript_include('vendors/flat-admin/lib/js/Chart.min.js') }}
         {{ javascript_include('vendors/flat-admin/lib/js/bootstrap-switch.min.js') }}
         {{ javascript_include('vendors/flat-admin/lib/js/jquery.matchHeight-min.js') }}
         {{ javascript_include('vendors/flat-admin/lib/js/jquery.dataTables.min.js') }}
         {{ javascript_include('vendors/flat-admin/lib/js/dataTables.bootstrap.min.js') }}
         {{ javascript_include('vendors/flat-admin/lib/js/ace/ace.js') }}
-        {{ javascript_include('vendors/flat-admin/lib/js/ace/model-html.js') }}
         {{ javascript_include('vendors/flat-admin/lib/js/ace/theme-github.js') }}
         {{ javascript_include('vendors/flat-admin/js/app.js') }}
-        {{ javascript_include('vendors/flat-admin/js/index.js') }}
         {% block javascript %}{% endblock %}
   </body>
 </html>    
