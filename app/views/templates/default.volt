@@ -7,7 +7,6 @@
         <link rel="icon" type="image/x-icon" href="{{url('')}}images/favicons/favicon.ico">
         <title>SayVot</title>
         {{ stylesheet_link('vendors/font-awesome-4.5.0/css/font-awesome.min.css') }}
-        {{ javascript_include('vendors/jquery/jquery-1.12.0.min.js') }}
         {{ stylesheet_link('vendors/bootstrap/css/bootstrap.min.css') }}
         {{ stylesheet_link('vendors/flat-admin/lib/css/animate.min.css') }}
         {{ stylesheet_link('vendors/flat-admin/lib/css/bootstrap-switch.min.css') }}
@@ -187,7 +186,7 @@
           </footer>
         <div>
         <!-- Javascript Libs -->
-        
+        {{ javascript_include('vendors/jquery/jquery-1.12.0.min.js') }}
         {{ javascript_include('vendors/bootstrap/js/bootstrap.min.js') }}
         {{ javascript_include('vendors/flat-admin/lib/js/Chart.min.js') }}
         {{ javascript_include('vendors/flat-admin/lib/js/bootstrap-switch.min.js') }}

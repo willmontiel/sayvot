@@ -6,7 +6,9 @@ class SurveyController extends ControllerBase {
     }
     
     public function draftAction() {
-      
+      if ($this->request->isPost()) {
+        
+      }
     }
     
     public function finishAction() {
