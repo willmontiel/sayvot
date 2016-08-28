@@ -82,10 +82,7 @@ class SubtopicController extends ControllerBase {
           "bind" => array($idSubject, 1)
       ));
       
-      $obj = new stdClass();
-      $obj->id = 0;
-      $obj->text = "Seleccione una opción";
-      $array = array($obj);
+      $array = array();
       
       foreach ($subtopics as $subtopic) {
         $obj = new stdClass();

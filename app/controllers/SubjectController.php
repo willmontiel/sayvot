@@ -73,10 +73,7 @@ class SubjectController extends ControllerBase {
           "bind" => array(1)
       ));
       
-      $obj = new stdClass();
-      $obj->id = 0;
-      $obj->text = "Seleccione una opción";
-      $array = array($obj);
+      $array = array();
       
       foreach ($subjects as $subject) {
         $obj = new stdClass();

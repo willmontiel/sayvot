@@ -7,8 +7,11 @@ class SurveyController extends ControllerBase {
     
     public function newAction() {
       if ($this->request->isPost()) {
-        $this->logger->log("LALA");
+        $content = $this->getRequestContent();
+        
+        $this->logger->log($content);
       }
+      
     }
     
     public function finishAction() {

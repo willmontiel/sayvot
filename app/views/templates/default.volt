@@ -136,7 +136,7 @@
                                       <div class="panel-body">
                                           <ul class="nav navbar-nav">
                                               <li><a href="{{url('survey')}}">Ver encuestas</a></li>
-                                              <li><a href="{{url('survey/draft')}}">Nueva encuesta</a></li>
+                                              <li><a href="{{url('survey/new')}}">Nueva encuesta</a></li>
                                           </ul>
                                       </div>
                                   </div>
