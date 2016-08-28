@@ -166,3 +166,7 @@ and open the template in the editor.
 .bold {
    font-weight: 800;
 }
+
+angular-select {
+  width: 100%;
+}

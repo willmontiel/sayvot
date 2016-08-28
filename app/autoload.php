@@ -13,7 +13,8 @@
     $loader->registerNamespaces(array(
         'Sayvot\\Misc' => '../app/misc/',
         'Sayvot\\Logic' => '../app/logic/',
-        'Sayvot\\Validators' => '../app/validators/'
+        'Sayvot\\Validators' => '../app/validators/',
+        'Sayvot\\Wrappers' => '../app/wrappers/'
     ), true);
 
     // register autoloader

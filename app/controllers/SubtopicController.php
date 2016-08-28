@@ -90,6 +90,7 @@ class SubtopicController extends ControllerBase {
         $obj->text = $subtopic->name;
         $array[] = $obj;
       }
+
       return $this->setJsonResponse($array, 200);
     } catch (InvalidArgumentException $ex) {
       return $this->setJsonResponse($ex->getMessage(), 400);

@@ -1,6 +1,7 @@
 {% extends "templates/default.volt" %}
 {% block css %}
-  {{ stylesheet_link('vendors/chosen-1.5.1/chosen.min.css') }}
+  {{ stylesheet_link('vendors/angular-ui-notification/dist/angular-ui-notification.min.css') }}
+  {{ stylesheet_link('vendors/angular-material-design/css/angular-material.min.css') }}
 {% endblock %}
 {% block javascript %}
   {{ javascript_include('vendors/chosen-1.5.1/chosen.jquery.min.js') }}
@@ -8,7 +9,12 @@
     var myBaseURL = "{{urlManager.getBaseUri(true)}}";
   </script>
   {{ javascript_include('vendors/angular/angular.min.js') }}
+  {{ javascript_include('vendors/angular-material-design/js/angular-animate.min.js') }}
+  {{ javascript_include('vendors/angular-material-design/js/angular-aria.min.js') }}
+  {{ javascript_include('vendors/angular-material-design/js/angular-messages.min.js') }}
+  {{ javascript_include('vendors/angular-material-design/js/angular-material.min.js') }}
   {{ javascript_include('vendors/angular-chosen/angular-chosen.min.js') }}
+  {{ javascript_include('vendors/angular-ui-notification/dist/angular-ui-notification.min.js') }}
   {{ javascript_include('js/angular/survey/app.js') }}
 {% endblock %}
 
@@ -36,30 +42,30 @@
         <label class="control-label">
           *Tema:
         </label> 
-        <select ng-model="subject" ng-change="subjectChange()" class="chosen">
-            <option value="">- Selecciona una opción -</option>
-            <option ng-repeat="sub in subjects" value="{{ '{{sub.id}}' }}">{{ '{{sub.text}}' }}</option>
-        </select>
+
+        <md-select placeholder="Selecciona una opción" ng-model="subject" md-on-open="subjectOpen()" ng-change="subjectChange()" class="angular-select">
+          <md-option ng-value="{{ '{{sub.id}}' }}" ng-repeat="sub in subjects">{{ '{{sub.text}}' }}</md-option>
+        </md-select>
       </div>
 
       <div class="form-group">
         <label class="control-label">
           *Sub-tema:
         </label> 
-        <select ng-model="subtopic" ng-disabled="!subject" ng-change="subtopicChange()">
-          <option value="">- Selecciona una opción -</option>
-          <option ng-repeat="subt in subtopics" value="{{ '{{subt.id}}' }}">{{ '{{subt.text}}' }}</option>
-        </select>
+
+        <md-select placeholder="Selecciona una opción" ng-model="subtopic" ng-disabled="!subject" ng-change="subtopicChange()" class="angular-select">
+          <md-option ng-value="{{ '{{subt.id}}' }}" ng-repeat="subt in subtopics">{{ '{{subt.text}}' }}</md-option>
+        </md-select>
       </div>
 
       <div class="form-group">
         <label class="control-label">
           *Contenido del sub-tema:
         </label> 
-        <select class="chosen" ng-model="subtopicContent" ng-disabled="!subject || !subtopic">
-            <option value="">- Selecciona una opción -</option>
-            <option ng-repeat="subtc in subtopicsContent" value="{{ '{{subtc.id}}' }}">{{ '{{subtc.text}}' }}</option>
-        </select>
+
+        <md-select placeholder="Selecciona una opción" ng-model="subtopicContent" ng-disabled="!subject || !subtopic" class="angular-select">
+          <md-option ng-value="{{ '{{subtc.id}}' }}" ng-repeat="subtc in subtopicsContent">{{ '{{subtc.text}}' }}</md-option>
+        </md-select>
       </div>
 
       <div class="form-group text-right">
