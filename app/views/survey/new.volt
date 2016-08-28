@@ -8,6 +8,7 @@
     var myBaseURL = "{{urlManager.getBaseUri(true)}}";
   </script>
   {{ javascript_include('vendors/angular/angular.min.js') }}
+  {{ javascript_include('vendors/angular-chosen/angular-chosen.min.js') }}
   {{ javascript_include('js/angular/survey/app.js') }}
 {% endblock %}
 
@@ -36,7 +37,7 @@
           *Tema:
         </label> 
         <select ng-model="subject" ng-change="subjectChange()" class="chosen">
-            <option value="">- Seleccione -</option>
+            <option value="">- Selecciona una opción -</option>
             <option ng-repeat="sub in subjects" value="{{ '{{sub.id}}' }}">{{ '{{sub.text}}' }}</option>
         </select>
       </div>
@@ -46,7 +47,7 @@
           *Sub-tema:
         </label> 
         <select ng-model="subtopic" ng-disabled="!subject" ng-change="subtopicChange()">
-          <option value="">- Seleccione -</option>
+          <option value="">- Selecciona una opción -</option>
           <option ng-repeat="subt in subtopics" value="{{ '{{subt.id}}' }}">{{ '{{subt.text}}' }}</option>
         </select>
       </div>
@@ -55,8 +56,8 @@
         <label class="control-label">
           *Contenido del sub-tema:
         </label> 
-        <select ng-model="subtopicContent" ng-disabled="!subject || !subtopic">
-            <option value="">- Seleccione -</option>
+        <select class="chosen" ng-model="subtopicContent" ng-disabled="!subject || !subtopic">
+            <option value="">- Selecciona una opción -</option>
             <option ng-repeat="subtc in subtopicsContent" value="{{ '{{subtc.id}}' }}">{{ '{{subtc.text}}' }}</option>
         </select>
       </div>

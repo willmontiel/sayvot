@@ -1,4 +1,4 @@
-angular.module('sayvot', [])
+angular.module('sayvot', ['angular.chosen'])
     .factory('main', ['$http', '$window', '$q', function ($http, $window, $q) {
         function sendDataToCreateSurvey(data) {
             var deferred = $q.defer();
@@ -62,7 +62,6 @@ angular.module('sayvot', [])
       }])
     .controller('ctrlNewSurvey', ['$rootScope', '$scope', '$http', 'main', '$window', function ($rootScope, $scope, $http, main, $window) {
         main.getSubjects().then(function (data) {
-          $(".chosen").chosen();
             $scope.subjects = data;
         });
         
@@ -79,9 +78,12 @@ angular.module('sayvot', [])
         },
             
         $scope.newSurvey = function () {
+          console.log("name: " + $scope.name);
+          console.log("s: " + $scope.subtopicContent);
+          
           var data = {
             name: $scope.name,
-            idSubtopicContent: $scope.idSubtopicContent
+            subtopicContent: $scope.subtopicContent
           };
           
           main.save(data).then(function (data){

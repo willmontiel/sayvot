@@ -7,6 +7,8 @@ class SurveyController extends ControllerBase {
     
     public function newAction() {
       if ($this->request->isPost()) {
+    
+    
         $content = $this->getRequestContent();
         
         $this->logger->log($content);
